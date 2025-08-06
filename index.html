@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="preload"
+      as="image"
+      href="/itaTrendingBooksImgs/la-catastrofica-visita.avif"
+      fetchpriority="high" 
+      type="image/avif"/>
+    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      property="og:title"
+      content="Book Finder | Search and Discover Books" />
+    <meta
+      property="og:description"
+      content="Find books by title, author or subject using the Open Library API." />
+    <meta
+      property="og:image"
+      content="/src/assets/images/pexels-tima-miroshnichenko-6550396.webp" />
+    <meta property="og:type" content="website" />
+
+    <meta
+      name="description"
+      content="Find books by title, author or subject using the Open Library API. Explore, search, and discover your next read." />
+    <title>Book Finder | Search and Discover Books</title>
+
+    <style>
+      .single-book {
+        margin: 20px auto;
+        width: 60%;
+        border-radius: 5px;
+        background-color: var(--overlay);
+        padding: 20px 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+          "header header"
+          "img details";
+      }
+      .single-book h2 {
+        text-align: center;
+        grid-area: header;
+        padding: 10px;
+        color: var(--main-color);
+        text-shadow: 2px 2px 6px;
+      }
+      .thumbnail {
+        height: 300px;
+        width: 200px;
+        object-fit: cover;
+        grid-area: img;
+        border-radius: 4px;
+        box-shadow: var(--shadow);
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+    </style>
+    <!-- <link rel="preconnect" href="https://ik.imagekit.io" /> -->
+
+    <link
+      rel="stylesheet"
+      href="/assets/BookResults-BCOcqgEb.css"
+      media="print"
+      onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="/assets/BookResults-BCOcqgEb.css" />
+    </noscript>
+
+    <link
+      rel="preload"
+      href="/locales/en.json"
+      as="fetch"
+      crossorigin="anonymous" />
+
+    <link
+      rel="preload"
+      as="image"
+      href="/src/assets/images/small-pexels-tima-miroshnichenko2.avif"
+      type="image/webp"
+      fetchPriority="high" />
+    
+
+    <link
+      rel="preload"
+      as="image"
+      href="/src/assets/images/pexels-tima-miroshnichenko-6550396.webp"
+      type="image/webp" />
+    <!-- Preconnect to Google Books API -->
+    <!-- <link rel="preconnect" href="https://www.googleapis.com" />
+    <link rel="dns-prefetch" href="https://www.googleapis.com" /> -->
+
+    <!-- Preconnect to Open Library images -->
+    <!-- <link rel="preconnect" href="https://covers.openlibrary.org" />
+    <link rel="dns-prefetch" href="https://covers.openlibrary.org" /> -->
+
+    <!-- <link rel="preconnect" href="https://www.google-analytics.com" /> -->
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Google tag (gtag.js) -->
+    <!-- <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-D34GJLZCBE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-D34GJLZCBE", { send_page_view: false });
+    </script> -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
