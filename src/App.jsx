@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Suspense, lazy } from "react";
 const Favorites = lazy(() => import("./pages/Favorites"));
@@ -7,9 +7,13 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BackToTop from "./components/BackToTop";
 import NavBar from "./components/NavBar";
-// import Footer from './components/Footer';
 import FooterLoader from './components/FooterLoader';
 import useGoogleAnalytics from './hooks/useGoogleAnalytics';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ResetPassword from './pages/ResetPassword';
+import UpdatePassword from './pages/UpdatePassword';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   useGoogleAnalytics();
@@ -72,11 +76,15 @@ export default function App() {
         {t("skipToMain")}
       </a>
       <div
-        fetchPriority='high'
+        fetchPriority="high"
         className={`page-wrapper ${
           isFavoritesPage ? "favorites-page" : "home-page"
         }`}>
         <NavBar favorites={favorites} t={t} />
+       
+        <nav>
+          <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
+        </nav>
         <LanguageSwitcher />
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
@@ -94,19 +102,24 @@ export default function App() {
             <Route
               path="/favorites"
               element={
-                <Favorites
-                  favorites={favorites}
-                  toggleFavorite={toggleFavorite}
-                />
+                <ProtectedRoute>
+                  <Favorites
+                    favorites={favorites}
+                    toggleFavorite={toggleFavorite}
+                  />
+                </ProtectedRoute>
               }
             />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path='/reset-password' element={<ResetPassword />} />
+            <Route path='/update-password' element={<UpdatePassword />} />
           </Routes>
         </Suspense>
       </div>
       <BackToTop scrollContainerSelector="body" />
-      
-        <FooterLoader />
-      
+
+      <FooterLoader />
     </div>
   );
 }
