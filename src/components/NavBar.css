@@ -45,25 +45,59 @@ nav > .favorites-active-link {
   text-decoration: underline white 2px;
 }
 
+/* @media screen and (max-width: 500px) { */
 @media screen and (max-width: 500px) {
   nav {
     justify-content: space-evenly;
   }
 
+  .login,
+  .logout,
   nav > .home,
   nav > .favorites {
-    width: 90px;
-    font-size: 0.8rem;
+    width: 40px;
+    height: 35px;
+    font-size: 1rem;
     padding: 10px 5px;
   }
 
+  .login, 
+  .logout,
   nav > .home-active-link,
   nav > .favorites-active-link {
-    width: 100px;
-    font-size: 0.9rem;
-    padding: 10px 5px;
+    width: 50px;
+    height: 40px;
+    font-size: 1.5rem;
+    padding: 5px;
   }
 }
+
+@media screen and (min-width: 500px) and (max-width: 680px) {
+  nav {
+    justify-content: space-evenly;
+  }
+
+  .login,
+  .logout,
+  nav > .home,
+  nav > .favorites {
+    width: 60px;
+    height: 40px;
+    font-size: 1.3rem;
+    padding: 0;
+  }
+
+  .login, 
+  .logout,
+  nav > .home-active-link,
+  nav > .favorites-active-link {
+    width: 70px;
+    height: 45px;
+    font-size: 1.9rem;
+    padding: 0;
+  }
+}
+
 
 @media (hover: hover) {
     .home:hover,

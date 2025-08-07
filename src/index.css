@@ -117,20 +117,18 @@ button:focus-visible {
   flex: 1;
 }
 
-
-
 .italiano > img,
 .english > img {
-  width: 32px;
-  height: 24px;
+  width: 20px;
+  height: 16px;
 }
 
 .english,
 .italiano {
   background-color: var(--overlay);
   border-radius: 5px;
-  width: 50px;
-  height: 36px;
+  width: 20px;
+  height: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -139,9 +137,9 @@ button:focus-visible {
     box-shadow 0.3s ease;
 }
 
-.english.selected > img,
-.italiano.selected > img {
-  transform: scale(1.5);
+.english.selected,
+.italiano.selected {
+  border: 3px solid var(--main-color);
 }
 
 .italiano {
@@ -167,24 +165,26 @@ button:focus-visible {
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 500px) {
+  .italiano,
+  .english {
+    transform: scale(0.8);
+  }
+}
+
+@media screen and (max-width: 1000px) {
   .italiano {
     position: fixed;
     top: 35px;
     left: 0.5%;
-    transform: scale(0.6);
+    /* transform: scale(0.6); */
   }
 
   .english {
     position: fixed;
     top: 5px;
     left: 0.5%;
-    transform: scale(0.6);
-  }
-
-  .italiano.selected,
-  .english.selected {
-    transform: scale(0.8);
+    /* transform: scale(0.6); */
   }
 }
 

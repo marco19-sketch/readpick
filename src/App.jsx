@@ -75,7 +75,7 @@ export default function App() {
     }
   };
 
-  console.log('login derived from register', login)
+ 
 
   return (
     <div className="root">

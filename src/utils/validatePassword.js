@@ -14,7 +14,7 @@ export function validatePassword(password) {
   // if (!rules.symbol) errors.push("Almeno un simbolo speciale (es. !, @, #)");
 
   const isValid = errors.length === 0;
- console.log('errors', errors, 'isValid', isValid)
+ 
   return {
     rules,
     errors,

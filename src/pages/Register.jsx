@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { validatePassword } from "../utils/validatePassword";
 import "./Register.css";
+import { useNavigate } from 'react-router-dom';
 
 export default function Register({ setLogin }) {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ export default function Register({ setLogin }) {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
+  const navigate = useNavigate();
 
   const { rules, isValid } = validatePassword(password);
 
@@ -25,6 +27,7 @@ export default function Register({ setLogin }) {
       await createUserWithEmailAndPassword(auth, email.trim(), password);
       setSuccess(true);
       setLogin(true);
+      navigate('/');
       // Firebase fa già il login automatico dopo la registrazione
     } catch (err) {
       setError(err.message);

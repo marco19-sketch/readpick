@@ -18,8 +18,10 @@ export default function Login({setLogin, login}) {
     setError("");
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      
       setLogin(true);
       navigate('/')
+      console.log({ email, password, login });
     } catch (err) {
       setError(err.message);
     }
