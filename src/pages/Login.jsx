@@ -4,15 +4,15 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import "./Login.css";
 
-export default function Login() {
+export default function Login({setLogin, login}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [login, setLogin] = useState(false);
-
+  // const [login, setLogin] = useState(false);
+  
   const handleLogin = async e => {
     e.preventDefault();
-    console.log("signed in try", email, password);
+    
     setLogin(false);
     setError("");
     try {

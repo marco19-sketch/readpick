@@ -22,54 +22,20 @@ export default function SearchBar({
   setSuggestions,
   handleFetchNew,
 }) {
-
   const debounceTimeout = useRef(null);
-
-  // const getSuggestions = useCallback(
-  //   async input => {
-  //     if (!input) return;
-  //     const encoded = encodeURIComponent(input.trim());
-  //     const url = `https://www.googleapis.com/books/v1/volumes?q=${searchMode}:${encoded}&maxResults=5`;
-  //     // const url = `https://www.googleapis.com/books/v1/volumes?q=${searchMode}:${encoded}&maxResults=5`;
-  //     console.log('suggestions url', url)
-  //     try {
-  //       const res = await fetch(url);
-  //       const data = await res.json();
-  //       const items = data.items || [];
-  //       console.log('titles', items.map(c => c.volumeInfo?.title))
-
-  //       // Build suggestions based on search mode
-  //       const extracted = items
-  //         .map(item => {
-  //           const info = item.volumeInfo;
-  //           if (searchMode === "intitle") return info.title;
-  //           if (searchMode === "inauthor") return info.authors?.[0];
-  //           // if (searchMode === "subject") return info.categories?.[0];
-  //           return null;
-  //         })
-  //         .filter(Boolean);
-
-  //       setSuggestions([...new Set(extracted)]); // remove duplicates
-  //     } catch (error) {
-  //       console.error("Suggestion fetch error:", error);
-  //       setSuggestions([]);
-  //     }
-  //   },
-  //   [searchMode, setSuggestions]
-  // );
 
   const getSuggestions = useCallback(
     async input => {
       if (!input) return;
       const encoded = encodeURIComponent(input.trim());
       const url = `https://openlibrary.org/search.json?q=${encoded}&limit=10`;
-      console.log("suggestions url", url);
+      
 
       try {
         const res = await fetch(url);
         const data = await res.json();
         const docs = data.docs || [];
-        console.log('data docs', data.docs)
+      
 
         const extracted = docs
           .map(doc => {
@@ -89,8 +55,6 @@ export default function SearchBar({
     [searchMode, setSuggestions]
   );
 
-
-
   // const handleInputChange = e => {
   //   const value = e.target.value;
   //   setQuery(value);
@@ -100,8 +64,6 @@ export default function SearchBar({
   //     setSuggestions([]);
   //   }
   // };
-
-  
 
   const handleInputChange = e => {
     const value = e.target.value;
@@ -118,7 +80,6 @@ export default function SearchBar({
     }
   };
 
-
   useEffect(() => {
     resetResults();
   }, [searchMode, resetResults]);
@@ -127,7 +88,7 @@ export default function SearchBar({
     <div className="search-bar">
       <div className="label-container">
         {["intitle", "inauthor"].map(mode => (
-        // {["intitle", "inauthor", "subject"].map(mode => (
+          // {["intitle", "inauthor", "subject"].map(mode => (
           <CustomRadio
             key={mode}
             label={t(`searchBy${labelsMap[mode]}`)}
@@ -147,7 +108,7 @@ export default function SearchBar({
         onChange={handleInputChange}
         placeholder={placeholderMap[searchMode] || t("selectCriteria")}
         onKeyDown={e => {
-          if (e.key === 'Escape') {
+          if (e.key === "Escape") {
             setSuggestions([]);
           }
         }}

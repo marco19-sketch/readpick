@@ -2,16 +2,16 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { validatePassword } from "../utils/validatePassword";
-import './Register.css';
+import "./Register.css";
 
-export default function Register() {
+export default function Register({ setLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
 
-  const {rules, isValid} = validatePassword(password);
+  const { rules, isValid } = validatePassword(password);
 
   // const isValid =
   //   rules.length && rules.uppercase && rules.number && rules.symbol;
@@ -20,12 +20,11 @@ export default function Register() {
     e.preventDefault();
     setError("");
     setSuccess(false);
-    console.log("handleRegister triggered");
 
     try {
-      console.log("email", email);
       await createUserWithEmailAndPassword(auth, email.trim(), password);
       setSuccess(true);
+      setLogin(true);
       // Firebase fa già il login automatico dopo la registrazione
     } catch (err) {
       setError(err.message);
@@ -33,8 +32,7 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleRegister}
-      className='register-form'>
+    <form onSubmit={handleRegister} className="register-form">
       <h2>Registrati</h2>
       <input
         className="email"
@@ -58,7 +56,7 @@ export default function Register() {
           <li style={{ color: rules.length ? "green" : "red" }}>
             {rules.length ? "✅" : "❌"} Almeno 8 caratteri
           </li>
-          <li style={{ color: rules.uppercase ? "green" : "red" }}>
+          {/* <li style={{ color: rules.uppercase ? "green" : "red" }}>
             {rules.uppercase ? "✅" : "❌"} Almeno un lettera maiuscola
           </li>
           <li style={{ color: rules.number ? "green" : "red" }}>
@@ -66,13 +64,13 @@ export default function Register() {
           </li>
           <li style={{ color: rules.symbol ? "green" : "red" }}>
             {rules.symbol ? "✅" : "❌"} One special symbol (e.g. !, @, #)
-          </li>
+          </li> */}
         </ul>
       )}
       <br />
-      <button type="submit"
-        disabled={!isValid}
-      >Crea account</button>
+      <button type="submit" disabled={!isValid}>
+        Crea account
+      </button>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p>Registration successful! You are logged in.</p>}
     </form>

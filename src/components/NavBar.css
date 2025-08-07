@@ -10,6 +10,9 @@ nav {
   z-index: 1000;
 }
 
+.logout,
+.login,
+.register,
 nav > .home,
 nav > .favorites {
   background-color: var(--overlay);

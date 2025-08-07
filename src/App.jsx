@@ -15,7 +15,12 @@ import ResetPassword from './pages/ResetPassword';
 import UpdatePassword from './pages/UpdatePassword';
 import ProtectedRoute from './components/ProtectedRoute';
 
+
+
 export default function App() {
+  const [login, setLogin] = useState(false);
+
+   
   useGoogleAnalytics();
   const [fetchedBooks, setFetchedBooks] = useState(() => {
     const saved = localStorage.getItem("cachedBooks");
@@ -70,6 +75,8 @@ export default function App() {
     }
   };
 
+  console.log('login derived from register', login)
+
   return (
     <div className="root">
       <a href="#main-content" className="skip-link">
@@ -80,12 +87,13 @@ export default function App() {
         className={`page-wrapper ${
           isFavoritesPage ? "favorites-page" : "home-page"
         }`}>
-        <NavBar favorites={favorites} t={t} />
-       
-        <nav>
+        <NavBar setLogin={setLogin} login={login} favorites={favorites} t={t} />
+
+        {/* <nav>
           <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
-        </nav>
+        </nav> */}
         <LanguageSwitcher />
+       
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route
@@ -110,10 +118,11 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path='/reset-password' element={<ResetPassword />} />
-            <Route path='/update-password' element={<UpdatePassword />} />
+            <Route  path="/login" element={<Login setLogin={setLogin} login={login} />} />
+            
+            <Route path="/register" element={<Register setLogin={setLogin} />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/update-password" element={<UpdatePassword />} />
           </Routes>
         </Suspense>
       </div>
