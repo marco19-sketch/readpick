@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import "./Login.css";
@@ -8,7 +8,8 @@ export default function Login({setLogin, login}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  // const [login, setLogin] = useState(false);
+  const navigate = useNavigate();
+  
   
   const handleLogin = async e => {
     e.preventDefault();
@@ -18,6 +19,7 @@ export default function Login({setLogin, login}) {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       setLogin(true);
+      navigate('/')
     } catch (err) {
       setError(err.message);
     }
