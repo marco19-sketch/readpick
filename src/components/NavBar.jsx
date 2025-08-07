@@ -19,18 +19,14 @@ export default function NavBar({ t, favorites, login, setLogin }) {
         to="/favorites">
         {t("favorites")} ({favorites.length})
       </NavLink>
-      {/* <NavLink className='login' to="/login"> */}
 
-      {/*maybe move register link into login page*/}
-      <NavLink className="register" to="/register">
-        Register
-      </NavLink>
-      {/* <button className="logout" onClick={logout}> */}
       {login ? (
-        <button className="logout" onClick={() => {logout();
-          setLogin(false);}
-        }>
-        {/* <button className="logout" onClick={logout}> */}
+        <button
+          className="logout"
+          onClick={() => {
+            logout();
+            setLogin(false);
+          }}>
           Logout
         </button>
       ) : (

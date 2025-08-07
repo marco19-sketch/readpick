@@ -46,7 +46,11 @@ export default function Login({setLogin, login}) {
         {error && <p style={{ color: "red" }}>{error}</p>}
       </form>
       <p className="forgot-password-link">
+       
         <NavLink to="/reset-password">Forgot password?</NavLink>
+        </p>
+        <p className='login-to-register'>Non hai un account?
+        <NavLink to='/register'>Registrati</NavLink>
       </p>
     </>
   );
