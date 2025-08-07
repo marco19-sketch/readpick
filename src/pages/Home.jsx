@@ -2,18 +2,15 @@ import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Modal from "../components/Modal";
 import SearchBar from "../components/SearchBar";
-
 import itaTrendingBooks from "../data/itaTrendingBooks";
 import "./Home.css";
-
 import { scrollup } from "../utils/scrollup";
 import FavoriteButton from "../components/FavoriteButton";
 import { devLog } from "../utils/devLog";
-import BookResults from '../components/BookResults';
+import BookResults from "../components/BookResults";
+import useIsMobile from "../hooks/useIsMobile";
 
 import mobileBg from "../assets/images/small-pexels-tima-miroshnichenko2.avif";
-
-
 
 function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const [selectedTitle, setSelectedTitle] = useState(null);
@@ -29,18 +26,8 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const { t } = useTranslation();
   const [activeQuery, setActiveQuery] = useState("");
   const [activeMode, setActiveMode] = useState("intitle");
-
   const [suggestions, setSuggestions] = useState([]);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    
-    const checkMobile = () => setIsMobile(window.innerWidth <= 550);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useIsMobile();
 
   const placeholderMap = {
     intitle: t("searchPlaceholder.intitle"),
@@ -65,7 +52,6 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
 
       const res = await fetch(
         `https://www.googleapis.com/books/v1/volumes?q=${q}&startIndex=${startIndex}&maxResults=${maxResult}`
-      
       );
 
       if (!res.ok) {
@@ -159,7 +145,6 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const isFavorite = book => favorites.some(fav => fav.id === book.id);
 
   useEffect(() => {
-    
     if (fetchedBooks.length > 0) {
       setHasSearched(true);
     }
@@ -171,7 +156,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
         <h1 className="main-title">Book Finder</h1>
         {/* <h1 className="main-title">{t("title") || 'Book Finder'}</h1> */}
       </header>
-      
+
       {isMobile && (
         <img
           src={mobileBg}
@@ -180,7 +165,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
           className="mobile-background"
           decoding="async"
           fetchPriority="high"
-          loading='eager'
+          loading="eager"
         />
       )}
       <div className={`home-page ${loading ? "wait-cursor" : ""}`}>
@@ -210,27 +195,22 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
           {/* {loading && <LoadingSkeleton />} */}
 
           {!hasSearched && (
-            
             <BookResults
               books={itaTrendingBooks}
               favorites={favorites}
               toggleFavorite={toggleFavorite}
               t={t}
-             
               onSelect={handleSelected}
             />
-            
           )}
 
           {uniqueBooks.length > 0 && (
-          
             <>
               <BookResults
                 books={uniqueBooks}
                 favorites={favorites}
                 toggleFavorite={toggleFavorite}
                 t={t}
-               
                 onSelect={handleSelected}
               />
               <button
@@ -243,15 +223,16 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
                     return newIndex;
                   });
                 }}>
-                {t("loadMore") || 'Load more'}
+                {t("loadMore") || "Load more"}
               </button>
             </>
-           
           )}
 
           {!loading && showNoResultsModal && (
             <Modal onClose={() => setShowNoResultsModal(false)}>
-              <p className="no-results">{t("noResults") || 'No results found'}</p>
+              <p className="no-results">
+                {t("noResults") || "No results found"}
+              </p>
             </Modal>
           )}
           {!loading && startIndex !== 0 && showNoResultsModal && (
@@ -267,7 +248,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
               <div className="modal">
                 <h2 id="modal-title">{selectedTitle?.volumeInfo?.title}</h2>
                 <p className="full-description">
-                  <strong>{t("fullDescription") || 'Full Description'}:</strong>{" "}
+                  <strong>{t("fullDescription") || "Full Description"}:</strong>{" "}
                   {selectedTitle.volumeInfo?.description ||
                     t("noDescription", "No description available")}
                 </p>
