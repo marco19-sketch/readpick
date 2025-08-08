@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import "./Login.css";
+import { auth } from "../../firebase";
+import './auth.css';
+import './login.css';
 
 export default function Login({ setLogin, login }) {
   const [email, setEmail] = useState("");
@@ -27,12 +28,12 @@ export default function Login({ setLogin, login }) {
   };
 
   return (
-    <div className='login-background'>
-    <div className="login-page">
-      <form onSubmit={handleLogin} className="login-form">
-        <h2 className='login-header'>Login</h2>
+    <div className='auth-background'>
+    <div className="auth-page">
+      <form onSubmit={handleLogin} className="auth-form">
+        <h2 className='auth-header'>Login</h2>
         <input
-          className='login-input'
+          className='auth-input'
           type="email"
           placeholder="Email"
           value={email}
@@ -40,23 +41,23 @@ export default function Login({ setLogin, login }) {
         />
         <br />
         <input
-          className='login-input'
+          className='auth-input'
           type="password"
           placeholder="Password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
         <br />
-        <button className='login-btn' type="submit">Login</button>
-        {login && <p className='login-success'>Loggato con successo</p>}
-        {error && <p className='login-fail' style={{ color: "red" }}>{error}</p>}
+        <button className='auth-btn' type="submit">Login</button>
+        {login && <p className='auth-success'>Loggato con successo</p>}
+        {error && <p className='auth-fail' style={{ color: "red" }}>{error}</p>}
       </form>
       
-        <NavLink className='forgot-link' to="/reset-password">Forgot password?</NavLink>
+        <NavLink className='auth-link' to="/reset-password">Forgot password?</NavLink>
       
-      <p className="link-register">
+      <p className="auth-p-link">
         Non hai un account?
-        <NavLink className='nav-link-reg' to="/register">Registrati</NavLink>
+        <NavLink className='auth-nav-link' to="/register">Registrati</NavLink>
       </p>
     </div>
     </div>

@@ -9,10 +9,10 @@ import BackToTop from "./components/BackToTop";
 import NavBar from "./components/NavBar";
 import FooterLoader from './components/FooterLoader';
 import useGoogleAnalytics from './hooks/useGoogleAnalytics';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ResetPassword from './pages/ResetPassword';
-import UpdatePassword from './pages/UpdatePassword';
+import Login from './pages/auth-pages/Login';
+import Register from './pages/auth-pages/Register';
+import ResetPassword from './pages/auth-pages/ResetPassword';
+import UpdatePassword from './pages/auth-pages/UpdatePassword';
 import ProtectedRoute from './components/ProtectedRoute';
 
 

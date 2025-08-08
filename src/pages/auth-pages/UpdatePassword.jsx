@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { confirmPasswordReset } from "firebase/auth";
-import { auth } from "../firebase";
-import { validatePassword } from "../utils/validatePassword";
-import "./UpdatePassword.css";
+import { auth } from "../../firebase";
+import { validatePassword } from "../../utils/validatePassword";
+import "./auth.css";
 
 export default function UpdatePassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -47,12 +47,12 @@ export default function UpdatePassword() {
   };
 
   return (
-    <div className="update-pass-background">
-      <div className="update-pass-page">
-        <form className='update-pass-form' onSubmit={handleSubmit}>
-          <h2 className='update-pass-header'>Set New Password</h2>
+    <div className="auth-background">
+      <div className="auth-page">
+        <form className='auth-form' onSubmit={handleSubmit}>
+          <h2 className='auth-header'>Set New Password</h2>
           <input
-            className='update-pass-input'
+            className='auth-input'
             type="password"
             placeholder="Enter your new password"
             value={newPassword}
@@ -63,10 +63,10 @@ export default function UpdatePassword() {
 
           {/* Password requirements list */}
           {passwordTouched && !isValid && (
-            <ul className="update-pass-rules">
+            <ul className="auth-rules">
               {errors.map((err, index) => (
                 <li 
-                className='update-pass-msgs'
+                className='auth-msgs'
                 key={index} style={{ color: "red" }}>
                   {err}
                 </li>
@@ -74,8 +74,8 @@ export default function UpdatePassword() {
             </ul>
           )}
 
-          <button className='update-pass-btn' type="submit">Update Password</button>
-          {message && <p className={`update-pass-${msgGreen ? 'success' : 'error'}`}>{message}</p>}
+          <button className='auth-btn' type="submit">Update Password</button>
+          {message && <p className={`auth-${msgGreen ? 'success' : 'error'}`}>{message}</p>}
         </form>
       </div>
     </div>

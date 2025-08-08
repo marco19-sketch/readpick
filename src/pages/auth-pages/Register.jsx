@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import { validatePassword } from "../utils/validatePassword";
-import "./Register.css";
+import { auth } from "../../firebase";
+import { validatePassword } from "../../utils/validatePassword";
+import "./auth.css";
 import { useNavigate, NavLink } from "react-router-dom";
 
 export default function Register({ setLogin }) {
@@ -35,12 +35,12 @@ export default function Register({ setLogin }) {
   };
 
   return (
-    <div className="register-background">
-      <div className="register-page">
-        <form onSubmit={handleRegister} className="register-form">
-          <h2 className='register-header'>Registrati</h2>
+    <div className="auth-background">
+      <div className="auth-page">
+        <form onSubmit={handleRegister} className="auth-form">
+          <h2 className="auth-header">Registrati</h2>
           <input
-            className="register-input"
+            className="auth-input"
             type="email"
             placeholder="Email"
             value={email}
@@ -48,7 +48,7 @@ export default function Register({ setLogin }) {
           />
           <br />
           <input
-            className="register-input"
+            className="auth-input"
             type="password"
             placeholder="Password (inserisci un password forte)"
             value={password}
@@ -73,13 +73,24 @@ export default function Register({ setLogin }) {
             </ul>
           )}
           <br />
-          <button className='register-btn' type="submit" disabled={!isValid}>
+          <button className="auth-btn" type="submit" disabled={!isValid}>
             Crea account
           </button>
-          {error && <p className='register-fail' style={{ color: "red" }}>{error}</p>}
-          {success && <p className='register-success'>Registration successful! You are logged in.</p>}
-          <p className='link-login'>Hai già un account?
-            <NavLink className='nav-link-login' to='/login'>Accedi.</NavLink>
+          {error && (
+            <p className="auth-error" style={{ color: "red" }}>
+              {error}
+            </p>
+          )}
+          {success && (
+            <p className="auth-success">
+              Registration successful! You are logged in.
+            </p>
+          )}
+          <p className="auth-p-link">
+            Hai già un account?
+            <NavLink className="auth-nav-link" to="/login">
+              Accedi.
+            </NavLink>
           </p>
         </form>
       </div>

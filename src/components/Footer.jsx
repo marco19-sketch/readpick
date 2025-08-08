@@ -1,14 +1,12 @@
-import './Footer.css';
+import "./Footer.css";
 
 export default function Footer() {
-
-
   return (
     <footer className="site-footer">
       <div className="media-credits">
         {" "}
         <p>
-          Sound effects obtained from{" "}
+          Sound effects from{" "}
           <a
             href="https://www.zapsplat.com"
             target="_blank"
@@ -16,15 +14,15 @@ export default function Footer() {
             ZapSplat
           </a>
         </p>
+        <p>Photos by:
         <a
           rel="noreferrer noopener"
           target="_blank"
           href="http://bit.ly/456zxY7">
-          Photo by Tima Miroshnichenko
+          Tima Miroshnichenko
         </a>
+        </p>
         <p>
-          {" "}
-          Foto di
           <a
             rel="noreferrer noopener"
             target="_blank"
@@ -39,9 +37,21 @@ export default function Footer() {
             Unsplash
           </a>
         </p>
-        {/* <p style={{ fontStyle: "italic", fontSize: "12px" }}>
-          As an Amazon Associate, I earn from qualifying purchases
-        </p> */}
+        <p>
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="http://bit.ly/45af4Da">
+            Наталия Когут
+          </a>{" "}
+          from{" "}
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="http://bit.ly/45s47vs">
+            Pixabay
+          </a>
+        </p>
       </div>
       <div className="legals">
         <div className="legal-links">
@@ -57,12 +67,7 @@ export default function Footer() {
             rel="noopener noreferrer">
             Terms of Use
           </a>
-          {/* <a
-            href="/legal/amazon-disclaimer.html"
-            target="_blank"
-            rel="noopener noreferrer">
-            Amazon Affiliate Disclaimer
-          </a> */}
+
           <a
             href="/legal/copyright.html"
             target="_blank"
@@ -80,4 +85,3 @@ export default function Footer() {
     </footer>
   );
 }
-

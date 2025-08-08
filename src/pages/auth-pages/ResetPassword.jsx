@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useResetPassword } from "../hooks/useResetPassword";
-import "./ResetPassword.css";
+import { useResetPassword } from "../../hooks/useResetPassword";
+import "./auth.css";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState("");
@@ -21,25 +21,25 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="reset-background">
-      <div className="reset-page">
-        <form className="reset-form" onSubmit={handleSubmit}>
-          <h2 className="reset-header">Reset Password</h2>
+    <div className="auth-background">
+      <div className="auth-page">
+        <form className="auth-form" onSubmit={handleSubmit}>
+          <h2 className="auth-header">Reset Password</h2>
           <input
-            className="reset-input"
+            className="auth-input"
             type="email"
             required
             placeholder="Enter your email"
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-          <button className="reset-btn" type="submit">
+          <button className="auth-btn" type="submit">
             Send Reset Email
           </button>
         </form>
-        {console.log('msgGreen', msgGreen)}
+        {console.log("msgGreen", msgGreen)}
         {message && (
-          <p className={`reset-${msgGreen ? 'success' : 'error'}`}>{message}</p>
+          <p className={`auth-${msgGreen ? "success" : "error"}`}>{message}</p>
         )}
       </div>
     </div>
