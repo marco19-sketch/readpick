@@ -1,17 +1,17 @@
 .login-background {
-  background-image: url("/src/assets/images/pexels-tima-miroshnichenko-6550396.webp");
+  background-image: url("/src/assets/images/pexels-tima-miroshnichenko-6550396.avif");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
-
   min-height: 100vh;
 }
 
 .login-page {
     width: 80%;
+    max-width: 600px;
     height: 100%;
     margin:150px auto;
     background-color: var(--overlay);
@@ -40,7 +40,6 @@
 .login-btn {
     margin: auto;
     display: block;
-    background-color: blue;
     background-color: var(--main-color);
     color: var(--text-color);
     box-shadow: var(--shadow);
