@@ -8,9 +8,10 @@ import { scrollup } from "../utils/scrollup";
 import FavoriteButton from "../components/FavoriteButton";
 import { devLog } from "../utils/devLog";
 import BookResults from "../components/BookResults";
-import useIsMobile from "../hooks/useIsMobile";
+import desktopBg from "../assets/images/pexels-tima-1920.avif";
+// import useIsMobile from "../hooks/useIsMobile";
 
-import mobileBg from "../assets/images/small-pexels-tima-miroshnichenko2.avif";
+import mobileBg from "../assets/images/pexels-tima-500.avif";
 
 function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const [selectedTitle, setSelectedTitle] = useState(null);
@@ -27,7 +28,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const [activeQuery, setActiveQuery] = useState("");
   const [activeMode, setActiveMode] = useState("intitle");
   const [suggestions, setSuggestions] = useState([]);
-  const isMobile = useIsMobile(550);
+  // const isMobile = useIsMobile(550);
 
   const placeholderMap = {
     intitle: t("searchPlaceholder.intitle"),
@@ -152,12 +153,26 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
 
   return (
     <>
-      <header>
+    {/* <div className='scrollable-background'> */}
+      {/* <header>
         <h1 className="main-title">Book Finder</h1>
-        {/* <h1 className="main-title">{t("title") || 'Book Finder'}</h1> */}
-      </header>
+        
+      </header> */}
 
-      {isMobile && (
+      <img
+        src={mobileBg}
+        srcSet={`${mobileBg} 500w, ${desktopBg} 1920w`}
+        sizes="(max-width: 640px) 100vw, 1920px"
+        alt=" "
+        aria-hidden="true"
+        className="home-bg"
+        // className="mobile-background"
+        decoding="async"
+        fetchPriority="high"
+        loading="eager"
+      />
+
+      {/* {isMobile && (
         <img
           src={mobileBg}
           alt=" "
@@ -167,8 +182,11 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
           fetchPriority="high"
           loading="eager"
         />
-      )}
+      )} */}
       <div className={`home-page ${loading ? "wait-cursor" : ""}`}>
+        <header>
+          <h1 className="main-title">Book Finder</h1>
+        </header>
         <div className="main-container">
           <SearchBar
             query={query}

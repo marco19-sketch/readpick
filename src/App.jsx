@@ -7,15 +7,13 @@ import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BackToTop from "./components/BackToTop";
 import NavBar from "./components/NavBar";
-import FooterLoader from './components/FooterLoader';
-import useGoogleAnalytics from './hooks/useGoogleAnalytics';
-import Login from './pages/auth-pages/Login';
-import Register from './pages/auth-pages/Register';
-import ResetPassword from './pages/auth-pages/ResetPassword';
-import UpdatePassword from './pages/auth-pages/UpdatePassword';
-import ProtectedRoute from './components/ProtectedRoute';
-
-
+import FooterLoader from "./components/FooterLoader";
+import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
+import Login from "./pages/auth-pages/Login";
+import Register from "./pages/auth-pages/Register";
+import ResetPassword from "./pages/auth-pages/ResetPassword";
+import UpdatePassword from "./pages/auth-pages/UpdatePassword";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   const [login, setLogin] = useState(false);
@@ -28,7 +26,7 @@ export default function App() {
   ];
 
   const isAuthPage = authPaths.includes(location.pathname);
-   const isFavoritesPage = location.pathname === "/favorites";
+  const isFavoritesPage = location.pathname === "/favorites";
 
   useGoogleAnalytics();
   const [fetchedBooks, setFetchedBooks] = useState(() => {
@@ -46,8 +44,6 @@ export default function App() {
   });
 
   const { t } = useTranslation();
-  
- 
 
   useEffect(() => {
     localStorage.setItem("cachedBooks", JSON.stringify(fetchedBooks));
@@ -71,7 +67,6 @@ export default function App() {
         );
         //physical removal after delay
         setTimeout(() => {
-          
           setFavorites(prev => prev.filter(fav => fav.id !== book.id));
         }, 300);
       } else {
@@ -84,18 +79,11 @@ export default function App() {
     }
   };
 
- 
-
   return (
     <div className="root">
       <a href="#main-content" className="skip-link">
         {t("skipToMain")}
       </a>
-      {/* <div
-        fetchPriority="high"
-        className={`page-wrapper ${
-          isFavoritesPage ? "favorites-page" : "home-page"
-        }`}> */}
 
       <div
         fetchPriority="high"
@@ -108,9 +96,6 @@ export default function App() {
         }`}>
         <NavBar setLogin={setLogin} login={login} favorites={favorites} t={t} />
 
-        {/* <nav>
-          <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
-        </nav> */}
         <LanguageSwitcher />
 
         <Suspense fallback={<div>Loading...</div>}>

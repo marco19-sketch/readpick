@@ -14,13 +14,14 @@ export default function Footer() {
             ZapSplat
           </a>
         </p>
-        <p>Photos by:
-        <a
-          rel="noreferrer noopener"
-          target="_blank"
-          href="http://bit.ly/456zxY7">
-          Tima Miroshnichenko
-        </a>
+        <p>
+          Photos by:
+          <a
+            rel="noreferrer noopener"
+            target="_blank"
+            href="http://bit.ly/456zxY7">
+            Tima Miroshnichenko
+          </a>
         </p>
         <p>
           <a
@@ -37,6 +38,7 @@ export default function Footer() {
             Unsplash
           </a>
         </p>
+        <a href="http://bit.ly/41l7xPF">congerdesign</a>
         <p>
           <a
             rel="noopener noreferrer"
