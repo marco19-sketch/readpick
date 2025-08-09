@@ -9,7 +9,7 @@ import FavoriteButton from "../components/FavoriteButton";
 import { devLog } from "../utils/devLog";
 import BookResults from "../components/BookResults";
 import desktopBg from "../assets/images/pexels-tima-1920.avif";
-// import useIsMobile from "../hooks/useIsMobile";
+
 
 import mobileBg from "../assets/images/pexels-tima-500.avif";
 
@@ -153,11 +153,6 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
 
   return (
     <>
-    {/* <div className='scrollable-background'> */}
-      {/* <header>
-        <h1 className="main-title">Book Finder</h1>
-        
-      </header> */}
 
       <img
         src={mobileBg}
@@ -166,7 +161,6 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
         alt=" "
         aria-hidden="true"
         className="home-bg"
-        // className="mobile-background"
         decoding="async"
         fetchPriority="high"
         loading="eager"

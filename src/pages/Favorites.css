@@ -1,4 +1,4 @@
-.favorites-page {
+/* .favorites-page {
   background-image: url("/src/assets/images/vitaly-gariev-g7v8HQkFIyo-unsplash.webp");
   background-size: cover;
   background-repeat: no-repeat;
@@ -8,10 +8,26 @@
   flex-direction: column;
 
 
-/*independent scroll from home page*/
+independent scroll from home page
   min-height: 100vh; 
   overflow-y: auto; 
-  overscroll-behavior: contain; /* prevent body scroll chaining */
+  overscroll-behavior: contain; prevent body scroll chaining
+} */
+
+.favorites-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+.favorites-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
 }
 
 .favorites-main-container {
@@ -47,12 +63,10 @@
   margin: 5px auto 5px;
 }
 
-@media screen and (max-width: 550px) {
+/* @media screen and (max-width: 550px) {
   .favorites-page {
     background-image: none;
-    /*trying to stop weird zoom-effect on mobile*/
-    /*so moving the background image to jsx <img> stopped the zoom-effect*/
-  }
+      }
 
   .fav-mobile-background {
     position: fixed;
@@ -62,5 +76,5 @@
     z-index: -1;
   }
 
-}
+} */
 

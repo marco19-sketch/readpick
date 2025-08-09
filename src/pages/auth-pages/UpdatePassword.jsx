@@ -4,6 +4,8 @@ import { confirmPasswordReset } from "firebase/auth";
 import { auth } from "../../firebase";
 import { validatePassword } from "../../utils/validatePassword";
 import "./auth.css";
+import mobileBg from '../../assets/images/leaves-640.avif';
+import desktopBg from '../../assets/images/leaves-1280.avif';
 
 export default function UpdatePassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -48,6 +50,15 @@ export default function UpdatePassword() {
 
   return (
     <div className="auth-background">
+       <img
+              className="auth-bg-auto-size"
+              src={mobileBg}
+              srcSet={`${mobileBg} 907w, ${desktopBg} 1280w`}
+              sizes='(max-width: 640px) 100vw, 1280px'
+              alt=""
+              aria-hidden="true"
+              decoding="auto"
+            />
       <div className="auth-page">
         <form className='auth-form' onSubmit={handleSubmit}>
           <h2 className='auth-header'>Set New Password</h2>

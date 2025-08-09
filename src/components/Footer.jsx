@@ -38,15 +38,32 @@ export default function Footer() {
             Unsplash
           </a>
         </p>
-        <a href="http://bit.ly/41l7xPF">congerdesign</a>
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href="http://bit.ly/41l7xPF">
+          congerdesign
+        </a>{' '}
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href="http://bit.ly/45af4Da">
+          Наталия Когут
+        </a>{" "}
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href="http://bit.ly/4fwohJl">
+          Susan Q Yin
+        </a>{' '}
+        <a
+          rel="noopener noreferrer"
+          target="_blank"
+          href="http://bit.ly/47lYpOc">
+          Jose Antonio Alba
+        </a>{' '}
         <p>
-          <a
-            rel="noopener noreferrer"
-            target="_blank"
-            href="http://bit.ly/45af4Da">
-            Наталия Когут
-          </a>{" "}
-          from{" "}
+          from
           <a
             rel="noopener noreferrer"
             target="_blank"

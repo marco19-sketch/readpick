@@ -7,7 +7,9 @@ import BackToTop from "../components/BackToTop";
 import "./Favorites.css";
 import FavoriteButton from "../components/FavoriteButton";
 import BookCardMinimal from "../components/BookCardMinimal";
-import mobileBgFav from "../assets/images/smaller-vitaly-gariev-unsplash.webp";
+import mobileBgFav from "../assets/images/vitaly-500x571.webp";
+import desktopBgFav from '../assets/images/vitaly-1920.avif'
+
 
 function requestIdleCallbackWithFallback(callback) {
   if ("requestIdleCallback" in window) {
@@ -30,15 +32,15 @@ function Favorites({ favorites, toggleFavorite }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [showFullList, setShowFullList] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  // const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    const checkMobile = () => setIsMobile(window.innerWidth <= 550);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  //   const checkMobile = () => setIsMobile(window.innerWidth <= 550);
+  //   checkMobile();
+  //   window.addEventListener("resize", checkMobile);
+  //   return () => window.removeEventListener("resize", checkMobile);
+  // }, []);
 
   useEffect(() => {
     const idleCallback = requestIdleCallbackWithFallback(() =>
@@ -56,15 +58,22 @@ function Favorites({ favorites, toggleFavorite }) {
 
   return (
     <div className="favorites-page">
-      
-      {isMobile && (
+      <img
+        src={mobileBgFav}
+        srcSet={`${mobileBgFav} 500w, ${desktopBgFav} 1920w`}
+        sizes='(max-width: 640px) 100vw, 1920'
+        className='favorites-bg'
+        alt=""
+        aria-hidden="true"
+      />
+      {/* {isMobile && (
         <img
           src={mobileBgFav}
           alt=""
           aria-hidden="true"
           className="fav-mobile-background"
         />
-      )}
+      )} */}
       <div className="favorites-main-container">
         <LanguageSwitcher />
         <h2 className="favorites-header">
