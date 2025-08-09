@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation, Link } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Suspense, lazy } from "react";
 const Favorites = lazy(() => import("./pages/Favorites"));
@@ -19,8 +19,17 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   const [login, setLogin] = useState(false);
+  const location = useLocation();
+  const authPaths = [
+    "/login",
+    "/register",
+    "/reset-password",
+    "/update-password",
+  ];
 
-   
+  const isAuthPage = authPaths.includes(location.pathname);
+   const isFavoritesPage = location.pathname === "/favorites";
+
   useGoogleAnalytics();
   const [fetchedBooks, setFetchedBooks] = useState(() => {
     const saved = localStorage.getItem("cachedBooks");
@@ -37,8 +46,8 @@ export default function App() {
   });
 
   const { t } = useTranslation();
-  const location = useLocation();
-  const isFavoritesPage = location.pathname === "/favorites";
+  
+ 
 
   useEffect(() => {
     localStorage.setItem("cachedBooks", JSON.stringify(fetchedBooks));
@@ -82,10 +91,20 @@ export default function App() {
       <a href="#main-content" className="skip-link">
         {t("skipToMain")}
       </a>
-      <div
+      {/* <div
         fetchPriority="high"
         className={`page-wrapper ${
           isFavoritesPage ? "favorites-page" : "home-page"
+        }`}> */}
+
+      <div
+        fetchPriority="high"
+        className={`page-wrapper ${
+          isFavoritesPage
+            ? "favorites-page"
+            : isAuthPage
+            ? "auth-page-wrapper"
+            : "home-page"
         }`}>
         <NavBar setLogin={setLogin} login={login} favorites={favorites} t={t} />
 
@@ -93,7 +112,7 @@ export default function App() {
           <Link to="/login">Login</Link> | <Link to="/register">Register</Link>
         </nav> */}
         <LanguageSwitcher />
-       
+
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route
@@ -118,9 +137,15 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
-            <Route  path="/login" element={<Login setLogin={setLogin} login={login} />} />
-            
-            <Route path="/register" element={<Register setLogin={setLogin} />} />
+            <Route
+              path="/login"
+              element={<Login setLogin={setLogin} login={login} />}
+            />
+
+            <Route
+              path="/register"
+              element={<Register setLogin={setLogin} />}
+            />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/update-password" element={<UpdatePassword />} />
           </Routes>

@@ -3,7 +3,12 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { validatePassword } from "../../utils/validatePassword";
 import "./auth.css";
+// import './Register.css';
 import { useNavigate, NavLink } from "react-router-dom";
+// import useIsMobile from "../../hooks/useIsMobile";
+import mobileBg from "../../assets/images/book-813x711.avif";
+import desktopBg from '../../assets/images/book-1280.avif';
+
 
 export default function Register({ setLogin }) {
   const [email, setEmail] = useState("");
@@ -12,6 +17,7 @@ export default function Register({ setLogin }) {
   const [success, setSuccess] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
   const navigate = useNavigate();
+
 
   const { rules, isValid } = validatePassword(password);
 
@@ -36,6 +42,15 @@ export default function Register({ setLogin }) {
 
   return (
     <div className="auth-background">
+      <img
+        className="auth-bg-auto-size"
+        src={mobileBg}
+        srcSet={`${mobileBg} 813w, ${desktopBg} 1280w`}
+        sizes="(max-width: 640px) 100vw, 1280px"
+        alt=""
+        aria-hidden="true"
+        decoding="auto"
+      />
       <div className="auth-page">
         <form onSubmit={handleRegister} className="auth-form">
           <h2 className="auth-header">Registrati</h2>

@@ -27,7 +27,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const [activeQuery, setActiveQuery] = useState("");
   const [activeMode, setActiveMode] = useState("intitle");
   const [suggestions, setSuggestions] = useState([]);
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile(550);
 
   const placeholderMap = {
     intitle: t("searchPlaceholder.intitle"),

@@ -1,12 +1,17 @@
 .auth-background {
-  /* background-image: url("/src/assets/images/pexels-tima-miroshnichenko-6550396.avif"); */
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  background-image: none;
+  /* Or set your auth background here */
+}
+
+
+.auth-bg-auto-size {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: block;
 }
 
 .auth-page {
