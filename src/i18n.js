@@ -9,6 +9,7 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: "it", // fallback if language file is missing
+    supportedLngs: ['en', 'it'],
     backend: {
       loadPath: "/locales/{{lng}}.json", // e.g. /public/locales/it.json
     },
@@ -16,6 +17,8 @@ i18n
       // Options for LanguageDetector
       order: ["localStorage", "cookie", "navigator"],
       caches: ["localStorage"], // remember language in localStorage
+      lookupLocalStorage: 'i18nextLng',
+      checkWhiteList: true
     },
     interpolation: {
       escapeValue: false,
