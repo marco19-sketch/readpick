@@ -32,15 +32,6 @@ function Favorites({ favorites, toggleFavorite }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [showFullList, setShowFullList] = useState(false);
-  // const [isMobile, setIsMobile] = useState(false);
-
-  // useEffect(() => {
-    
-  //   const checkMobile = () => setIsMobile(window.innerWidth <= 550);
-  //   checkMobile();
-  //   window.addEventListener("resize", checkMobile);
-  //   return () => window.removeEventListener("resize", checkMobile);
-  // }, []);
 
   useEffect(() => {
     const idleCallback = requestIdleCallbackWithFallback(() =>
@@ -66,14 +57,7 @@ function Favorites({ favorites, toggleFavorite }) {
         alt=""
         aria-hidden="true"
       />
-      {/* {isMobile && (
-        <img
-          src={mobileBgFav}
-          alt=""
-          aria-hidden="true"
-          className="fav-mobile-background"
-        />
-      )} */}
+      
       <div className="favorites-main-container">
         <LanguageSwitcher />
         <h2 className="favorites-header">

@@ -5,12 +5,14 @@ import { auth } from "../../firebase";
 import './auth.css';
 import mobileBg from '../../assets/images/girl-907x700.avif';
 import desktopBg from '../../assets/images/girl-1280-cropped.avif'
+import { useTranslation } from "react-i18next";
 
 export default function Login({ setLogin, login }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
 
   const handleLogin = async e => {
@@ -22,10 +24,19 @@ export default function Login({ setLogin, login }) {
       await signInWithEmailAndPassword(auth, email, password);
 
       setLogin(true);
-      navigate("/");
+      setTimeout(() =>
+      navigate("/"),
+      2000);
+
       console.log({ email, password, login });
     } catch (err) {
-      setError(err.message);
+      setError(
+        t("loginError", {
+          error: err.message,
+          defaultValue: `Credenziali errate: ${err.message}`,
+        })
+      );
+
     }
   };
 
@@ -35,7 +46,7 @@ export default function Login({ setLogin, login }) {
         className="auth-bg-auto-size"
         src={mobileBg}
         srcSet={`${mobileBg} 907w, ${desktopBg} 1280w`}
-        sizes='(max-width: 640px) 100vw, 1280px'
+        sizes="(max-width: 640px) 100vw, 1280px"
         alt=""
         aria-hidden="true"
         decoding="auto"
@@ -43,7 +54,7 @@ export default function Login({ setLogin, login }) {
 
       <div className="auth-page">
         <form onSubmit={handleLogin} className="auth-form">
-          <h2 className="auth-header">Login</h2>
+          <h2 className="auth-header">{t('login')}</h2>
           <input
             className="auth-input"
             type="email"
@@ -61,24 +72,28 @@ export default function Login({ setLogin, login }) {
           />
           <br />
           <button className="auth-btn" type="submit">
-            Login
+            {t("login") || "Accedi"}
           </button>
-          {login && <p className="auth-success">Loggato con successo</p>}
+          {login && (
+            <p className="auth-success">
+              {t("loggedSuccess") || "Accesso eseguito"}
+            </p>
+          )}
           {error && (
-            <p className="auth-fail" style={{ color: "red" }}>
+            <p className="auth-error" style={{ color: "red" }}>
               {error}
             </p>
           )}
         </form>
 
         <NavLink className="auth-link" to="/reset-password">
-          Forgot password?
+          {t("forgotPassword", { defaultValue: "Password dimenticata?"})}
         </NavLink>
 
         <p className="auth-p-link">
-          Non hai un account?
+          {t("noAccount") || "Non hai un account?"}{' '}
           <NavLink className="auth-nav-link" to="/register">
-            Registrati
+            {t("signIn", { defaultValue: "Registrati" })}
           </NavLink>
         </p>
       </div>

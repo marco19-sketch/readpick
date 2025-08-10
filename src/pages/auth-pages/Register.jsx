@@ -8,6 +8,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 // import useIsMobile from "../../hooks/useIsMobile";
 import mobileBg from "../../assets/images/book-813x711.avif";
 import desktopBg from '../../assets/images/book-1280.avif';
+import { useTranslation } from 'react-i18next';
 
 
 export default function Register({ setLogin }) {
@@ -17,6 +18,7 @@ export default function Register({ setLogin }) {
   const [success, setSuccess] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
 
   const { rules, isValid } = validatePassword(password);
@@ -53,7 +55,9 @@ export default function Register({ setLogin }) {
       />
       <div className="auth-page">
         <form onSubmit={handleRegister} className="auth-form">
-          <h2 className="auth-header">Registrati</h2>
+          <h2 className="auth-header">
+            {t("register", { defaultValue: "Registrati" })}
+          </h2>
           <input
             className="auth-input"
             type="email"
@@ -65,7 +69,9 @@ export default function Register({ setLogin }) {
           <input
             className="auth-input"
             type="password"
-            placeholder="Password (inserisci un password forte)"
+            placeholder={t("passRegister", {
+              defaultValue: "Inserisci una password forte...",
+            })}
             value={password}
             onChange={e => setPassword(e.target.value)}
             onBlur={() => setPasswordTouched(true)}
@@ -74,22 +80,32 @@ export default function Register({ setLogin }) {
           {passwordTouched && (
             <ul style={{ listStyle: "none", padding: 0 }}>
               <li style={{ color: rules.length ? "green" : "red" }}>
-                {rules.length ? "✅" : "❌"} Almeno 8 caratteri
+                {rules.length ? "✅" : "❌"}{" "}
+                {t("8chars", { defaultValue: "Almeno 8 caratteri" })}
               </li>
-              {/* <li style={{ color: rules.uppercase ? "green" : "red" }}>
-            {rules.uppercase ? "✅" : "❌"} Almeno un lettera maiuscola
-          </li>
-          <li style={{ color: rules.number ? "green" : "red" }}>
-            {rules.number ? "✅" : "❌"} Almeno un numero
-          </li>
-          <li style={{ color: rules.symbol ? "green" : "red" }}>
-            {rules.symbol ? "✅" : "❌"} One special symbol (e.g. !, @, #)
-          </li> */}
+
+              <li style={{ color: rules.uppercase ? "green" : "red" }}>
+                {rules.uppercase ? "✅" : "❌"}{" "}
+                {t("upperCase", {
+                  defaultValue: "Almeno una lettera maiuscola",
+                })}
+              </li>
+              <li style={{ color: rules.number ? "green" : "red" }}>
+                {rules.number ? "✅" : "❌"}{" "}
+                {t("number", { defaultValue: "Almeno un numero" })}
+              </li>
+              <li style={{ color: rules.symbol ? "green" : "red" }}>
+                {rules.symbol ? "✅" : "❌"}{" "}
+                {t("specialChar", {
+                  defaultValue: "Almeno un carattere speciale (e.g. !, @, #)",
+                })}
+                (e.g. !, @, #)
+              </li>
             </ul>
           )}
           <br />
           <button className="auth-btn" type="submit" disabled={!isValid}>
-            Crea account
+            {t("createAccount", { defaultValue: "Crea account" })}
           </button>
           {error && (
             <p className="auth-error" style={{ color: "red" }}>
@@ -98,13 +114,16 @@ export default function Register({ setLogin }) {
           )}
           {success && (
             <p className="auth-success">
-              Registration successful! You are logged in.
+              {t("regSuccess", {
+                defaultValue:
+                  'Registrazione avvenuta con successo! Sei connesso. ',
+              })}
             </p>
           )}
           <p className="auth-p-link">
-            Hai già un account?
+            {t("alreadyAccount", { defaultValue: "Hai già un account?" })}{' '}
             <NavLink className="auth-nav-link" to="/login">
-              Accedi.
+              {t("login")}
             </NavLink>
           </p>
         </form>
