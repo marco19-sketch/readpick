@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { confirmPasswordReset } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import "./auth.css";
 import mobileBg from "../../assets/images/leaves-640.avif";
 import desktopBg from "../../assets/images/leaves-1280.avif";
+import { IoMdEyeOff } from "react-icons/io";
+import { IoEye } from "react-icons/io5";
 
 export default function UpdatePassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -17,6 +19,11 @@ export default function UpdatePassword() {
   const location = useLocation();
   const [msgGreen, setMsgGreen] = useState(false);
   const { t } = useTranslation();
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+  
+    const handleVisibility = useCallback(() => {
+      setPasswordVisibility(!passwordVisibility);
+    }, [passwordVisibility]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -74,17 +81,29 @@ export default function UpdatePassword() {
       />
       <div className="auth-page">
         <form className="auth-form" onSubmit={handleSubmit}>
-          <h2 className="auth-header">{t('setNewPass', {defaultValue: 'Crea nuova password'})}</h2>
-          <input
-            className="auth-input"
-            type="password"
-            placeholder={t('enterNewPass', {defaultValue : 'Inserisci nuova password...'})}
-            value={newPassword}
-            onChange={e => setNewPassword(e.target.value)}
-            onBlur={() => setPasswordTouched(true)}
-            required
-          />
-
+          <h2 className="auth-header">
+            {t("setNewPass", { defaultValue: "Crea nuova password" })}
+          </h2>
+          <div className="auth-input-container">
+            <input
+              className="auth-input password"
+              type={passwordVisibility ? "text" : "password"}
+              placeholder={t("enterNewPass", {
+                defaultValue: "Inserisci nuova password...",
+              })}
+              value={newPassword}
+              onChange={e => setNewPassword(e.target.value)}
+              onBlur={() => setPasswordTouched(true)}
+              required
+            />
+            <button
+              className="auth-toggle-visibility"
+              type="button"
+              onClick={handleVisibility}>
+              {passwordVisibility ? <IoEye /> : <IoMdEyeOff />}
+              {/* {passwordVisibility ? "👁️" : "🙈"} */}
+            </button>
+          </div>
           {/* Password requirements list */}
           {passwordTouched && !isValid && (
             <ul className="auth-rules">

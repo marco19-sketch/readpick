@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import './auth.css';
-import mobileBg from '../../assets/images/girl-907x700.avif';
-import desktopBg from '../../assets/images/girl-1280-cropped.avif'
+import "./auth.css";
+import mobileBg from "../../assets/images/girl-907x700.avif";
+import desktopBg from "../../assets/images/girl-1280-cropped.avif";
 import { useTranslation } from "react-i18next";
+import { IoMdEyeOff } from "react-icons/io";
+import { IoEye } from "react-icons/io5";
 
 export default function Login({ setLogin, login }) {
   const [email, setEmail] = useState("");
@@ -13,7 +15,11 @@ export default function Login({ setLogin, login }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
 
+  const handleVisibility = useCallback(() => {
+    setPasswordVisibility(!passwordVisibility);
+  }, [passwordVisibility]);
 
   const handleLogin = async e => {
     e.preventDefault();
@@ -24,9 +30,7 @@ export default function Login({ setLogin, login }) {
       await signInWithEmailAndPassword(auth, email, password);
 
       setLogin(true);
-      setTimeout(() =>
-      navigate("/"),
-      2000);
+      setTimeout(() => navigate("/"), 2000);
 
       console.log({ email, password, login });
     } catch (err) {
@@ -36,7 +40,6 @@ export default function Login({ setLogin, login }) {
           defaultValue: `Credenziali errate: ${err.message}`,
         })
       );
-
     }
   };
 
@@ -54,7 +57,7 @@ export default function Login({ setLogin, login }) {
 
       <div className="auth-page">
         <form onSubmit={handleLogin} className="auth-form">
-          <h2 className="auth-header">{t('login')}</h2>
+          <h2 className="auth-header">{t("login")}</h2>
           <input
             className="auth-input"
             type="email"
@@ -63,13 +66,23 @@ export default function Login({ setLogin, login }) {
             onChange={e => setEmail(e.target.value)}
           />
           <br />
-          <input
-            className="auth-input"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
+          <div className="auth-input-container">
+            <input
+              className="auth-input password"
+              type={passwordVisibility ? "text" : "password"}
+              // type="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            <button
+              className="auth-toggle-visibility"
+              type="button"
+              onClick={handleVisibility}>
+              {passwordVisibility ? <IoEye /> : <IoMdEyeOff />}
+              {/* {passwordVisibility ? "👁️" : "🙈"} */}
+            </button>
+          </div>
           <br />
           <button className="auth-btn" type="submit">
             {t("login") || "Accedi"}
@@ -87,11 +100,11 @@ export default function Login({ setLogin, login }) {
         </form>
 
         <NavLink className="auth-link" to="/reset-password">
-          {t("forgotPassword", { defaultValue: "Password dimenticata?"})}
+          {t("forgotPassword", { defaultValue: "Password dimenticata?" })}
         </NavLink>
 
         <p className="auth-p-link">
-          {t("noAccount") || "Non hai un account?"}{' '}
+          {t("noAccount") || "Non hai un account?"}{" "}
           <NavLink className="auth-nav-link" to="/register">
             {t("signIn", { defaultValue: "Registrati" })}
           </NavLink>

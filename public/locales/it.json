@@ -66,5 +66,6 @@
   "createAccount": "Crea account",
   "regSuccess":  "Registrazione avvenuta con successo! Sei connesso.",
   "alreadyAccount": "Hai già un account?",
-  "enterEmail": "Inserisci email"
+  "enterEmail": "Inserisci email",
+  "contact": "Contattami"
 }

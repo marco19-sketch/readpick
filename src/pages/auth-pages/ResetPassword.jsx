@@ -18,11 +18,11 @@ export default function ResetPassword() {
     if (success) {
       setMsgGreen(true);
       setMessage(
-        t("invalidEmail", { error, defaultValue: `Email non valida. ${error}` })
+        t("passwordSent", { defaultValue: `Email inviata, controlla la posta in arrivo` })
       );
     } else {
       setMessage(
-        t("invalidEmail", { error, defaultValue: "Email non valida." })
+        t("invalidEmail", { error, defaultValue: `Email non valida. ${error}` })
       );
 
       setMsgGreen(false);
@@ -56,7 +56,7 @@ export default function ResetPassword() {
             onChange={e => setEmail(e.target.value)}
           />
           <button className="auth-btn" type="submit">
-            {t("sendEmail") || "Invia email "}
+            {t("sendEmail", {defaultValue: "Invia email "})}
           </button>
         </form>
         {console.log("msgGreen", msgGreen)}

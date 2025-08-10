@@ -28,6 +28,7 @@
   width: 50%;
   margin: 0 auto;
   color: var(--main-color);
+  min-width: 200px;
 }
 
 .auth-header {
@@ -41,6 +42,30 @@
   width: 100%;
   margin: auto;
   padding: 5px;
+}
+
+.auth-input-container {
+  width: 100%;
+  position: relative;
+}
+
+.auth-input.password {
+  padding: 5px 20px 5px 5px ;
+  border: 1px solid;
+}
+
+.auth-toggle-visibility {
+  background: transparent;
+  border: none;
+  height: 32px;
+  position: absolute;
+  top: -3px;
+  right: -10px;
+}
+
+.auth-toggle-visibility:focus {
+  outline: none;
+  transform: scale(1.2)
 }
 
 .auth-btn {
@@ -71,6 +96,10 @@
 @media (hover: hover) {
   .auth-btn:hover {
     transform: scale(1.1);
+  }
+
+  .auth-toggle-visibility:hover {
+    color: var(--main-color);
   }
 }
 

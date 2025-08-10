@@ -1,6 +1,10 @@
 import "./Footer.css";
+import { FaEnvelope } from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
+
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="site-footer">
       <div className="media-credits">
@@ -43,7 +47,7 @@ export default function Footer() {
           target="_blank"
           href="http://bit.ly/41l7xPF">
           congerdesign
-        </a>{' '}
+        </a>{" "}
         <a
           rel="noopener noreferrer"
           target="_blank"
@@ -55,15 +59,15 @@ export default function Footer() {
           target="_blank"
           href="http://bit.ly/4fwohJl">
           Susan Q Yin
-        </a>{' '}
+        </a>{" "}
         <a
           rel="noopener noreferrer"
           target="_blank"
           href="http://bit.ly/47lYpOc">
           Jose Antonio Alba
-        </a>{' '}
+        </a>{" "}
         <p>
-          from
+          from{' '}
           <a
             rel="noopener noreferrer"
             target="_blank"
@@ -94,12 +98,12 @@ export default function Footer() {
             Copyright
           </a>
         </div>
-        <p className="copyright">
-          © 2025 Marco Brusca. All rights reserved.{" "}
-          <a href="mailto:marco19_70@hotmail.it" rel="me">
-            Contact me
-          </a>
-        </p>
+        <p className="copyright">© 2025 Marco Brusca. All rights reserved. </p>
+        <a  
+        id='contact'
+        href="mailto:marco19_70@hotmail.it" rel="me">
+          <FaEnvelope />{' '}{t('contact', {defaultValue: 'Contattami'})}
+        </a>
       </div>
     </footer>
   );
