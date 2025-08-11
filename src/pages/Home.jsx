@@ -9,9 +9,8 @@ import FavoriteButton from "../components/FavoriteButton";
 import { devLog } from "../utils/devLog";
 import BookResults from "../components/BookResults";
 import desktopBg from "../assets/images/pexels-tima-1920.avif";
-
-
 import mobileBg from "../assets/images/pexels-tima-500.avif";
+import LoadingSkeleton from '../components/LoadingSkeleton';
 
 function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const [selectedTitle, setSelectedTitle] = useState(null);
@@ -28,7 +27,6 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const [activeQuery, setActiveQuery] = useState("");
   const [activeMode, setActiveMode] = useState("intitle");
   const [suggestions, setSuggestions] = useState([]);
-  // const isMobile = useIsMobile(550);
 
   const placeholderMap = {
     intitle: t("searchPlaceholder.intitle"),
@@ -166,17 +164,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
         loading="eager"
       />
 
-      {/* {isMobile && (
-        <img
-          src={mobileBg}
-          alt=" "
-          aria-hidden="true"
-          className="mobile-background"
-          decoding="async"
-          fetchPriority="high"
-          loading="eager"
-        />
-      )} */}
+    
       <div className={`home-page ${loading ? "wait-cursor" : ""}`}>
         <header>
           <h1 className="main-title">Book Finder</h1>
@@ -204,7 +192,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
             </h2>
           )}
 
-          {/* {loading && <LoadingSkeleton />} */}
+          {loading && <LoadingSkeleton />}
 
           {!hasSearched && (
             <BookResults
