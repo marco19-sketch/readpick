@@ -2,9 +2,10 @@
 import "./BookCard.css";
 import FavoriteButton from "./FavoriteButton";
 import { useThumbnail } from "../utils/useThumbnail";
-import AmazonLink from './AmazonLink';
+// import AmazonLink from './AmazonLink';
+import React, { Suspense } from "react";
 
-
+const AmazonLink = React.lazy(() => import('./AmazonLink'))
 
 const languageMap = {
   en: "English",
@@ -143,23 +144,13 @@ export default function BookCard({
         </p>
 
         <div className="amazon-buy-link-container">
+          <Suspense fallback={<div>Loading</div>}>
           <AmazonLink title={title} author={authors} />
+          </Suspense>
           <p className='affiliate-para'>Affiliate link</p>
           {/* <p style={{ fontSize: "0.75rem", margin: 0  }}>Affiliate link</p> */}
         </div>
-        {/* <div className="buy-now-container">
-          {amazonLink ? (
-            <a
-              href={amazonLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="buy-now">
-              {t("seeOnAmazon") || "See on Amazon"}
-            </a>
-          ) : (
-            <p>{t("noPurchaseAvailable") || "No purchase available."}</p>
-          )}
-        </div> */}
+        
       </div>
     </div>
   );
