@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 
+
 export default function Login({ setLogin, login }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +17,7 @@ export default function Login({ setLogin, login }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  
 
   const handleVisibility = useCallback(() => {
     setPasswordVisibility(!passwordVisibility);
@@ -37,7 +39,7 @@ export default function Login({ setLogin, login }) {
       setError(
         t("loginError", {
           error: err.message,
-          defaultValue: `Credenziali errate: ${err.message}`,
+          defaultValue: 'Credenziali errate'
         })
       );
     }
@@ -89,7 +91,7 @@ export default function Login({ setLogin, login }) {
           </button>
           {login && (
             <p className="auth-success">
-              {t("loggedSuccess") || "Accesso eseguito"}
+              {t("loggedSuccess") || "Accesso in corso..."}
             </p>
           )}
           {error && (

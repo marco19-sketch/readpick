@@ -7,8 +7,8 @@ import BackToTop from "../components/BackToTop";
 import "./Favorites.css";
 import FavoriteButton from "../components/FavoriteButton";
 import BookCardMinimal from "../components/BookCardMinimal";
-import mobileBgFav from "../assets/images/vitaly-500x571.webp";
-import desktopBgFav from '../assets/images/vitaly-1920.avif'
+import mobileBgFav from "../assets/images/vitaly-girl-566x700.avif";
+import desktopBgFav from '../assets/images/vitaly-girl-1920.avif'
 
 
 function requestIdleCallbackWithFallback(callback) {
@@ -51,8 +51,10 @@ function Favorites({ favorites, toggleFavorite }) {
     <div className="favorites-page">
       <img
         src={mobileBgFav}
-        srcSet={`${mobileBgFav} 500w, ${desktopBgFav} 1920w`}
-        sizes='(max-width: 640px) 100vw, 1920'
+        // srcSet={`${mobileBgFav} 1x, ${desktopBgFav} 2x`}
+        // sizes='100vw'
+        srcSet={`${mobileBgFav} 566w, ${desktopBgFav} 1920w`}
+        sizes='(max-width: 640px) 100vw, 1920px'
         className='favorites-bg'
         alt=""
         aria-hidden="true"
