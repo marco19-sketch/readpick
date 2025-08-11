@@ -8,7 +8,7 @@ import "./Favorites.css";
 import FavoriteButton from "../components/FavoriteButton";
 import BookCardMinimal from "../components/BookCardMinimal";
 import mobileBgFav from "../assets/images/vitaly-girl-566x700.avif";
-import desktopBgFav from '../assets/images/vitaly-girl-1920.avif'
+import desktopBgFav from '../assets/images/vitaly-girl-1920.avif';
 
 
 function requestIdleCallbackWithFallback(callback) {

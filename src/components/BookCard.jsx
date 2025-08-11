@@ -144,9 +144,7 @@ export default function BookCard({
         </p>
 
         <div className="amazon-buy-link-container">
-          <Suspense fallback={<div>Loading</div>}>
           <AmazonLink title={title} author={authors} />
-          </Suspense>
           <p className='affiliate-para'>Affiliate link</p>
           {/* <p style={{ fontSize: "0.75rem", margin: 0  }}>Affiliate link</p> */}
         </div>
