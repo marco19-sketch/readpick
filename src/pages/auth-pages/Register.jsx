@@ -95,7 +95,7 @@ export default function Register({ setLogin }) {
                 {t("8chars", { defaultValue: "Almeno 8 caratteri" })}
               </li>
 
-              <li style={{ color: rules.uppercase ? "green" : "red" }}>
+              {/* <li style={{ color: rules.uppercase ? "green" : "red" }}>
                 {rules.uppercase ? "✅" : "❌"}{" "}
                 {t("upperCase", {
                   defaultValue: "Almeno una lettera maiuscola",
@@ -111,7 +111,7 @@ export default function Register({ setLogin }) {
                   defaultValue: "Almeno un carattere speciale (e.g. !, @, #)",
                 })}
                 (e.g. !, @, #)
-              </li>
+              </li> */}
             </ul>
           )}
           <br />
