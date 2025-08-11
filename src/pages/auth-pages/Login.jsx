@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 // import { signInWithEmailAndPassword } from "firebase/auth";
 // import { auth } from "../../firebase";
@@ -8,6 +8,7 @@ import desktopBg from "../../assets/images/girl-1280-cropped.avif";
 import { useTranslation } from "react-i18next";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
+import { AuthContext } from '../../context/AuthContext';
 
 
 export default function Login({ setLogin, login }) {
@@ -17,7 +18,7 @@ export default function Login({ setLogin, login }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  
+  const { initAuth } = useContext(AuthContext);
 
   const handleVisibility = useCallback(() => {
     setPasswordVisibility(!passwordVisibility);
@@ -30,6 +31,9 @@ export default function Login({ setLogin, login }) {
     setError("");
     try {
       // await signInWithEmailAndPassword(auth, email, password);
+
+      // 1. Call initAuth to load Firebase and set up the listener
+      await initAuth();
       // Dynamic import of Firebase auth module
       const { auth, signInWithEmailAndPassword } = await import(
         "../../firebase"
