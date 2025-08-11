@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+// import { signInWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "../../firebase";
 import "./auth.css";
 import mobileBg from "../../assets/images/girl-907x700.avif";
 import desktopBg from "../../assets/images/girl-1280-cropped.avif";
@@ -29,12 +29,16 @@ export default function Login({ setLogin, login }) {
     setLogin(false);
     setError("");
     try {
+      // await signInWithEmailAndPassword(auth, email, password);
+      // Dynamic import of Firebase auth module
+      const { auth, signInWithEmailAndPassword } = await import(
+        "../../firebase"
+      );
+
       await signInWithEmailAndPassword(auth, email, password);
 
       setLogin(true);
       setTimeout(() => navigate("/"), 2000);
-
-      
     } catch (err) {
       setError(
         t("loginError", {

@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth } from "../../firebase";
 import { validatePassword } from "../../utils/validatePassword";
 import "./auth.css";
 // import './Register.css';
@@ -38,7 +38,15 @@ export default function Register({ setLogin }) {
     setSuccess(false);
 
     try {
+      // await createUserWithEmailAndPassword(auth, email.trim(), password);
+
+      // Dynamically import the Firebase module here
+      const { auth, createUserWithEmailAndPassword } = await import(
+        "../../firebase"
+      );
+
       await createUserWithEmailAndPassword(auth, email.trim(), password);
+
       setSuccess(true);
       setLogin(true);
       navigate("/");

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { confirmPasswordReset } from "firebase/auth";
-import { auth } from "../../firebase";
+// import { confirmPasswordReset } from "firebase/auth";
+// import { auth } from "../../firebase";
 import { validatePassword } from "../../utils/validatePassword";
 import { useTranslation } from "react-i18next";
 import "./auth.css";
@@ -51,7 +51,20 @@ export default function UpdatePassword() {
     }
 
     try {
+      // await confirmPasswordReset(auth, oobCode, newPassword);
+
+      // Dynamically import the Firebase module here
+      // Use Promise.all to fetch both modules concurrently
+      const [firebaseModule, authModule] = await Promise.all([
+        import("../../firebase"),
+        import("firebase/auth"),
+      ]);
+
+      const { auth } = firebaseModule;
+      const { confirmPasswordReset } = authModule;
+
       await confirmPasswordReset(auth, oobCode, newPassword);
+
       setMsgGreen(true);
       setMessage(
         t("updateSuccess", {
