@@ -29,13 +29,11 @@ export default function SearchBar({
       if (!input) return;
       const encoded = encodeURIComponent(input.trim());
       const url = `https://openlibrary.org/search.json?q=${encoded}&limit=10`;
-      
 
       try {
         const res = await fetch(url);
         const data = await res.json();
         const docs = data.docs || [];
-      
 
         const extracted = docs
           .map(doc => {
@@ -54,16 +52,6 @@ export default function SearchBar({
     },
     [searchMode, setSuggestions]
   );
-
-  // const handleInputChange = e => {
-  //   const value = e.target.value;
-  //   setQuery(value);
-  //   if (value.length > 1) {
-  //     getSuggestions(value);
-  //   } else {
-  //     setSuggestions([]);
-  //   }
-  // };
 
   const handleInputChange = e => {
     const value = e.target.value;
@@ -99,50 +87,50 @@ export default function SearchBar({
           />
         ))}
       </div>
+      <div className="input-suggestion-container">
+        <input
+          name="search"
+          aria-label="Search for books"
+          className="input-element"
+          value={query}
+          onChange={handleInputChange}
+          placeholder={placeholderMap[searchMode] || t("selectCriteria")}
+          onKeyDown={e => {
+            if (e.key === "Escape") {
+              setSuggestions([]);
+            }
+          }}
+        />
 
-      <input
-        name="search"
-        aria-label="Search for books"
-        className="input-element"
-        value={query}
-        onChange={handleInputChange}
-        placeholder={placeholderMap[searchMode] || t("selectCriteria")}
-        onKeyDown={e => {
-          if (e.key === "Escape") {
-            setSuggestions([]);
-          }
-        }}
-      />
-
-      {suggestions.length > 0 && (
-        <ul className="suggestion-item">
-          {suggestions.map((sugg, idx) => (
-            <li
-              key={idx}
-              tabIndex="0"
-              onKeyDown={e => {
-                if (e.key === "Enter") {
-                  setQuery(sugg);
+        {suggestions.length > 0 && (
+          <ul className="suggestion-item">
+            {suggestions.map((sugg, idx) => (
+              <li
+                key={idx}
+                tabIndex="0"
+                onKeyDown={e => {
+                  if (e.key === "Enter") {
+                    setQuery(sugg);
+                    setSuggestions([]);
+                    handleFetchNew(sugg);
+                    e.currentTarget.blur();
+                  }
+                  if (e.key === "Escape") {
+                    setSuggestions([]);
+                  }
+                }}
+                onClick={e => {
+                  setQuery(sugg); // 👈 this value will be passed to Home when you click search
                   setSuggestions([]);
                   handleFetchNew(sugg);
                   e.currentTarget.blur();
-                }
-                if (e.key === "Escape") {
-                  setSuggestions([]);
-                }
-              }}
-              onClick={e => {
-                setQuery(sugg); // 👈 this value will be passed to Home when you click search
-                setSuggestions([]);
-                handleFetchNew(sugg);
-                e.currentTarget.blur();
-              }}>
-              {sugg}
-            </li>
-          ))}
-        </ul>
-      )}
-
+                }}>
+                {sugg}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
       <button
         className="btn-element"
         type="button"

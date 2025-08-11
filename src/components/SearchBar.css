@@ -25,17 +25,23 @@
   outline-offset: 3px;
 }
 
+.input-suggestion-container {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+
 .input-element {
   width: 300px;
   border-radius: 5px;
   color: var(--text-color);
   background-color: var(--main-color);
   text-align: center;
+  padding: 5px;
 }
 
 .suggestion-item {
   display: block;
-  margin: -18px auto 20px;
   text-align: center;
   list-style: none;
   background: var(--overlay);
@@ -44,11 +50,19 @@
   padding: 0;
   color: var(--main-color);
   width: 200px;
+
+
+  z-index: 10;
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%)
 }
 
 .suggestion-item li {
   cursor: pointer;
   padding: 8px;
+  z-index: 10;
 }
 
 .btn-element,
