@@ -2,13 +2,13 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Suspense, lazy } from "react";
 const Favorites = lazy(() => import("./pages/Favorites"));
-// const Home = lazy(() => import("./pages/Home"));
-import Home from './pages/Home';
+const Home = lazy(() => import("./pages/Home"));
+const Footer = lazy(() => import("./components/Footer"));
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BackToTop from "./components/BackToTop";
 import NavBar from "./components/NavBar";
-import FooterLoader from "./components/FooterLoader";
+// import FooterLoader from "./components/FooterLoader";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
 import Login from "./pages/auth-pages/Login";
 import Register from "./pages/auth-pages/Register";
@@ -139,7 +139,10 @@ export default function App() {
       </div>
       <BackToTop scrollContainerSelector="body" />
 
-      <FooterLoader />
+      {/* <FooterLoader /> */}
+      <Suspense fallback={<div>Loading</div>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
