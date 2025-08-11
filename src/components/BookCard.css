@@ -9,10 +9,10 @@
 .single-book {
   margin: 20px auto;
   width: 60%;
-  
+
   /* trying min-height to get a better CLS scoring */
   min-height: 222px;
-
+  /* didn't see any change, leave it for now */
 
   border-radius: 5px;
   background-color: var(--overlay);
@@ -48,7 +48,7 @@
   height: 300px;
   width: 200px;
   display: block;
-  margin: 10px 0 10px 2%;;
+  margin: 10px 0 10px 2%;
   object-fit: cover;
   box-shadow: var(--shadow);
   border-radius: 4px;
@@ -74,6 +74,10 @@
   align-self: center;
   padding: 0 30px 0 10px;
   color: var(--main-color);
+
+
+  min-width: 24%;
+
 }
 
 button.read-more {
@@ -84,7 +88,6 @@ button.read-more {
   outline: white;
 }
 
-
 .amazon-buy-link-container {
   display: block;
   width: fit-content;
@@ -92,12 +95,12 @@ button.read-more {
 }
 
 .affiliate-para {
-  font-size: .75rem;
+  font-size: 0.75rem;
   text-align: center;
 }
 
 /*underline slide-in*/
-.amazon-buy-link{
+.amazon-buy-link {
   position: relative;
   color: yellow;
   text-decoration: none;
@@ -115,7 +118,6 @@ button.read-more {
   transition: width 0.3s ease;
 }
 
-
 @media screen and (max-width: 800px) {
   .single-book {
     display: block;
@@ -131,42 +133,31 @@ button.read-more {
   }
 
   .amazon-buy-link-container {
-  width: 100%;
-  text-align: center;
-}
+    width: 100%;
+    text-align: center;
+  }
 
-
-
-.copies-sold {
-  font-size: 0.8rem;
-}
+  .copies-sold {
+    font-size: 0.8rem;
+  }
 }
 
 @media (hover: hover) {
-.thumb-btn:hover {
-  outline: none;
-  border: none;
-}
+  .thumb-btn:hover {
+    outline: none;
+    border: none;
+  }
 
-.thumbnail:hover {
-  outline: 1px solid yellow;
-  transform: scale(1.08);
-}
+  .thumbnail:hover {
+    outline: 1px solid yellow;
+    transform: scale(1.08);
+  }
 
-.amazon-buy-link:hover {
-  color: orange;
-}
+  .amazon-buy-link:hover {
+    color: orange;
+  }
 
-.amazon-buy-link:hover::after {
-  width: 100%;
-}
-/* 
-.buy-now:hover {
-  color: orange;
-}
-
-.buy-now:hover::after {
-  width: 100%;
-} */
-
+  .amazon-buy-link:hover::after {
+    width: 100%;
+  }
 }
