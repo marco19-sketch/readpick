@@ -10,11 +10,16 @@ import BackToTop from "./components/BackToTop";
 import NavBar from "./components/NavBar";
 // import FooterLoader from "./components/FooterLoader";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
-import Login from "./pages/auth-pages/Login";
-import Register from "./pages/auth-pages/Register";
-import ResetPassword from "./pages/auth-pages/ResetPassword";
-import UpdatePassword from "./pages/auth-pages/UpdatePassword";
+// import Login from "./pages/auth-pages/Login";
+const Login = lazy(() => import('./pages/auth-pages/Login'))
+// import Register from "./pages/auth-pages/Register";
+const Register = lazy(() => import("./pages/auth-pages/Register"));
+// import ResetPassword from "./pages/auth-pages/ResetPassword";
+const ResetPassword = lazy(() => import("./pages/auth-pages/ResetPassword"));
+// import UpdatePassword from "./pages/auth-pages/UpdatePassword";
+const UpdatePassword = lazy(() => import("./pages/auth-pages/UpdatePassword"));
 import ProtectedRoute from "./components/ProtectedRoute";
+
 
 export default function App() {
   const [login, setLogin] = useState(false);
