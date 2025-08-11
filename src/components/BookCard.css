@@ -9,6 +9,11 @@
 .single-book {
   margin: 20px auto;
   width: 60%;
+  
+  /* trying min-height to get a better CLS scoring */
+  min-height: 222px;
+
+
   border-radius: 5px;
   background-color: var(--overlay);
   padding: 20px 0;
