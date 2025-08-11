@@ -59,7 +59,7 @@ export default function ResetPassword() {
             {t("sendEmail", {defaultValue: "Invia email "})}
           </button>
         </form>
-        {console.log("msgGreen", msgGreen)}
+        
         {message && (
           <p className={`auth-${msgGreen ? "success" : "error"}`}>{message}</p>
         )}

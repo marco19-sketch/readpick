@@ -34,7 +34,7 @@ export default function Login({ setLogin, login }) {
       setLogin(true);
       setTimeout(() => navigate("/"), 2000);
 
-      console.log({ email, password, login });
+      
     } catch (err) {
       setError(
         t("loginError", {
