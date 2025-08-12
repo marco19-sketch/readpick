@@ -7,7 +7,7 @@ import mobileBg from "../../assets/images/leaves-640.avif";
 import desktopBg from "../../assets/images/leaves-1280.avif";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
-import useLazyFirebaseAuth from "../../hooks/useLazyFirebaseAuth";
+import { auth, confirmPasswordReset } from "../../firebaseMinimal";
 
 export default function UpdatePassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -19,7 +19,6 @@ export default function UpdatePassword() {
   const [msgGreen, setMsgGreen] = useState(false);
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const loadAuthFunction = useLazyFirebaseAuth();
 
   const handleVisibility = useCallback(() => {
     setPasswordVisibility(!passwordVisibility);
@@ -51,9 +50,6 @@ export default function UpdatePassword() {
     }
 
     try {
-      const { auth, func: confirmPasswordReset } = await loadAuthFunction(
-        "confirmPasswordReset"
-      );
       await confirmPasswordReset(auth, oobCode, newPassword);
 
       setMsgGreen(true);

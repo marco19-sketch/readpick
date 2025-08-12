@@ -1,6 +1,6 @@
 // src/hooks/useLogout.js
 import { signOut } from "firebase/auth";
-import { auth } from "../firebaseMinimal"; // import auth directly
+import { loadMinimalAuth } from "../firebaseMinimal";
 import { useNavigate } from "react-router-dom";
 
 export function useLogout() {
@@ -8,6 +8,7 @@ export function useLogout() {
 
   const logout = async () => {
     try {
+      const { auth } = await loadMinimalAuth();
       await signOut(auth);
       navigate("/login");
     } catch (error) {

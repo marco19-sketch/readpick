@@ -1,9 +1,9 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./auth.css";
 import mobileBg from "../../assets/images/susan-700x394.avif";
 import desktopBg from "../../assets/images/susan-1920.avif";
-import useLazyFirebaseAuth from "../../hooks/useLazyFirebaseAuth";
+import { auth, sendPasswordResetEmail } from "../../firebaseMinimal";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState("");
@@ -11,22 +11,14 @@ export default function ResetPassword() {
   const [msgGreen, setMsgGreen] = useState(false);
   const { t } = useTranslation();
 
-  const loadAuthFunction = useLazyFirebaseAuth();
-
-  const resetPassword = useCallback(
-    async email => {
-      try {
-        const { auth, func: sendPasswordResetEmail } = await loadAuthFunction(
-          "sendPasswordResetEmail"
-        );
-        await sendPasswordResetEmail(auth, email);
-        return { success: true };
-      } catch (error) {
-        return { success: false, error: error.message || error.toString() };
-      }
-    },
-    [loadAuthFunction]
-  );
+  const resetPassword = async email => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error.message || error.toString() };
+    }
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();

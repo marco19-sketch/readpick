@@ -1,16 +1,8 @@
 import { AuthContext } from "./AuthContext";
 import { useMinimalAuth } from "../firebaseMinimal";
-import { useEffect } from "react";
 
-export function AuthProvider({ children, onAuthReady }) {
+export function AuthProvider({ children }) {
   const { user, loading, isAuthInitialized } = useMinimalAuth();
-
-  // Notify parent when auth initialization completes
-  useEffect(() => {
-    if (isAuthInitialized && typeof onAuthReady === "function") {
-      onAuthReady();
-    }
-  }, [isAuthInitialized, onAuthReady]);
 
   if (!isAuthInitialized) {
     return <p>Loading authentication...</p>;

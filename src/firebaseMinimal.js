@@ -1,21 +1,17 @@
 // src/firebaseMinimal.js
 import { useState, useEffect } from "react";
 
-let authInstance = null;
-let onAuthStateChangedRef = null;
-
-export async function loadMinimalAuth() {
-  if (authInstance) {
-    return { auth: authInstance, onAuthStateChanged: onAuthStateChangedRef };
-  }
-
-  const { initializeApp } = await import("firebase/app");
-  const {
-    getAuth,
-    onAuthStateChanged,
-    setPersistence,
-    browserLocalPersistence,
-  } = await import("firebase/auth");
+import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  confirmPasswordReset,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 
   const firebaseConfig = {
     apiKey: "AIzaSyA3DdjjO7VoWN1cXThbIyfWBJMAGcluDrQ",
@@ -30,14 +26,11 @@ export async function loadMinimalAuth() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
 
-  await setPersistence(auth, browserLocalPersistence);
+  setPersistence(auth, browserLocalPersistence).catch(err => {
+  console.error("Error setting persistence:", err);
+});
 
-  authInstance = auth;
-  onAuthStateChangedRef = onAuthStateChanged;
-
-  return { auth, onAuthStateChanged };
-}
-
+ 
 // Hook to subscribe to auth state with minimal Firebase
 export function useMinimalAuth() {
   const [user, setUser] = useState(null);
@@ -45,35 +38,29 @@ export function useMinimalAuth() {
   const [isAuthInitialized, setIsAuthInitialized] = useState(false);
 
   useEffect(() => {
-    let unsubscribe;
+    const unsubscribe = onAuthStateChanged(auth, async currentUser => {
+      if (currentUser) {
+        await currentUser.getIdToken();
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+      setIsAuthInitialized(true);
+    });
 
-    loadMinimalAuth()
-      .then(({ auth, onAuthStateChanged }) => {
-        unsubscribe = onAuthStateChanged(auth, async currentUser => {
-          if (currentUser) {
-            // Wait until token is ready before marking initialized
-            await currentUser.getIdToken();
-            setUser(currentUser);
-          } else {
-            setUser(null);
-          }
-          setLoading(false);
-          setIsAuthInitialized(true);
-        });
-      })
-      .catch(err => {
-        console.error("Failed to load minimal Firebase auth:", err);
-        setLoading(false);
-        setIsAuthInitialized(true);
-      });
-
-    return () => {
-      if (unsubscribe) unsubscribe();
-    };
+    return () => unsubscribe();
   }, []);
 
   return { user, loading, isAuthInitialized };
 }
 
-// Export current auth instance
-export { authInstance as auth, onAuthStateChangedRef as onAuthStateChanged };
+// Export auth and onAuthStateChanged directly
+export { auth, onAuthStateChanged };
+
+export {
+  createUserWithEmailAndPassword,
+  confirmPasswordReset,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+};

@@ -6,7 +6,7 @@ import desktopBg from "../../assets/images/girl-1280-cropped.avif";
 import { useTranslation } from "react-i18next";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
-import useLazyFirebaseAuth from "../../hooks/useLazyFirebaseAuth";
+import { auth, signInWithEmailAndPassword } from "../../firebaseMinimal";
 
 export default function Login({ setLogin, login }) {
   const [email, setEmail] = useState("");
@@ -15,14 +15,12 @@ export default function Login({ setLogin, login }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const loadAuthFunction = useLazyFirebaseAuth();
 
   const handleVisibility = useCallback(() => {
     setPasswordVisibility(!passwordVisibility);
   }, [passwordVisibility]);
 
   const handleLogin = async e => {
-    console.log("handleLogin fired");
     e.preventDefault();
 
     if (!email || !password) {
@@ -34,10 +32,7 @@ export default function Login({ setLogin, login }) {
 
     setError("");
     try {
-      const { auth, func: signIn } = await loadAuthFunction(
-        "signInWithEmailAndPassword"
-      );
-      await signIn(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
 
       setLogin(true);
       setTimeout(() => navigate("/"), 2000);
@@ -51,7 +46,6 @@ export default function Login({ setLogin, login }) {
       );
     }
   };
-
   return (
     <div className="auth-background">
       <img

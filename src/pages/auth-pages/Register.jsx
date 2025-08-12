@@ -7,9 +7,7 @@ import desktopBg from "../../assets/images/book-1280.avif";
 import { useTranslation } from "react-i18next";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
-import useLazyFirebaseAuth from "../../hooks/useLazyFirebaseAuth";
-
-
+import { auth, createUserWithEmailAndPassword } from "../../firebaseMinimal";
 
 export default function Register({ setLogin }) {
   const [email, setEmail] = useState("");
@@ -21,14 +19,10 @@ export default function Register({ setLogin }) {
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const { rules, isValid } = validatePassword(password);
-  const loadAuthFunction = useLazyFirebaseAuth();
 
   const handleVisibility = useCallback(() => {
     setPasswordVisibility(!passwordVisibility);
   }, [passwordVisibility]);
-
-  // const isValid =
-  //   rules.length && rules.uppercase && rules.number && rules.symbol;
 
   const handleRegister = async e => {
     e.preventDefault();
@@ -36,19 +30,16 @@ export default function Register({ setLogin }) {
     setSuccess(false);
 
     try {
-
-      const { auth, func: createUser } = await loadAuthFunction("createUserWithEmailAndPassword");
-    await createUser(auth, email.trim(), password);
+      await createUserWithEmailAndPassword(auth, email.trim(), password);
 
       setSuccess(true);
       setLogin(true);
       navigate("/");
-      // Firebase fa già il login automatico dopo la registrazione
+      // Firebase automatically logs in after registration
     } catch (err) {
       setError(err.message);
     }
   };
-
   return (
     <div className="auth-background">
       <img
