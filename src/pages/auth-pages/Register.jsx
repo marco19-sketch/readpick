@@ -1,17 +1,12 @@
 import { useState, useCallback } from "react";
-// import { createUserWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../../firebase";
 import { validatePassword } from "../../utils/validatePassword";
 import "./auth.css";
-// import './Register.css';
 import { useNavigate, NavLink } from "react-router-dom";
-// import useIsMobile from "../../hooks/useIsMobile";
 import mobileBg from "../../assets/images/book-813x711.avif";
 import desktopBg from "../../assets/images/book-1280.avif";
 import { useTranslation } from "react-i18next";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
-// import { AuthContext } from '../../context/AuthContext';
 import useLazyFirebaseAuth from "../../hooks/useLazyFirebaseAuth";
 
 
@@ -25,7 +20,6 @@ export default function Register({ setLogin }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  // const { initAuth } = useContext(AuthContext);
   const { rules, isValid } = validatePassword(password);
   const loadAuthFunction = useLazyFirebaseAuth();
 
@@ -42,14 +36,6 @@ export default function Register({ setLogin }) {
     setSuccess(false);
 
     try {
-      // await createUserWithEmailAndPassword(auth, email.trim(), password);
-
-      // Dynamically import the Firebase module here
-      // await initAuth();
-      // const { auth } = await import("../../firebase");
-      // const { createUserWithEmailAndPassword } = await import("firebase/auth");
-
-      // await createUserWithEmailAndPassword(auth, email.trim(), password);
 
       const { auth, func: createUser } = await loadAuthFunction("createUserWithEmailAndPassword");
     await createUser(auth, email.trim(), password);

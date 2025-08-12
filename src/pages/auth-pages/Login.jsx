@@ -1,16 +1,12 @@
 import { useState, useCallback } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-// import { signInWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../../firebase";
 import "./auth.css";
 import mobileBg from "../../assets/images/girl-907x700.avif";
 import desktopBg from "../../assets/images/girl-1280-cropped.avif";
 import { useTranslation } from "react-i18next";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
-// import { AuthContext } from '../../context/AuthContext';
 import useLazyFirebaseAuth from "../../hooks/useLazyFirebaseAuth";
-
 
 export default function Login({ setLogin, login }) {
   const [email, setEmail] = useState("");
@@ -19,7 +15,6 @@ export default function Login({ setLogin, login }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  // const { initAuth } = useContext(AuthContext);
   const loadAuthFunction = useLazyFirebaseAuth();
 
   const handleVisibility = useCallback(() => {
@@ -29,7 +24,7 @@ export default function Login({ setLogin, login }) {
   const handleLogin = async e => {
     console.log("handleLogin fired");
     e.preventDefault();
-    
+
     if (!email || !password) {
       setError(
         t("missingCredentials", { defaultValue: "Inserisci email e password" })
@@ -37,35 +32,21 @@ export default function Login({ setLogin, login }) {
       return;
     }
 
-    // setLogin(false);
     setError("");
     try {
-      // await signInWithEmailAndPassword(auth, email, password);
-
-      // 1. Call initAuth to load Firebase and set up the listener
-      // await initAuth();
-      // Dynamic import of Firebase auth module
-      // const { auth } = await import(
-      //   "../../firebase"
-      // );
-      // const {signInWithEmailAndPassword} = await import('firebase/auth')
-
-      // await signInWithEmailAndPassword(auth, email, password);
-
-       const { auth, func: signIn } = await loadAuthFunction(
-         "signInWithEmailAndPassword"
-       );
-       await signIn(auth, email, password);
-
+      const { auth, func: signIn } = await loadAuthFunction(
+        "signInWithEmailAndPassword"
+      );
+      await signIn(auth, email, password);
 
       setLogin(true);
       setTimeout(() => navigate("/"), 2000);
     } catch (err) {
-      console.error('error', err)
+      console.error("error", err);
       setError(
         t("loginError", {
           error: err.message,
-          defaultValue: 'Credenziali errate'
+          defaultValue: "Credenziali errate",
         })
       );
     }
@@ -99,7 +80,6 @@ export default function Login({ setLogin, login }) {
             <input
               className="auth-input password"
               type={passwordVisibility ? "text" : "password"}
-              // type="password"
               placeholder="Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -114,7 +94,7 @@ export default function Login({ setLogin, login }) {
             </button>
           </div>
           <br />
-          <button  className="auth-btn" type="submit">
+          <button className="auth-btn" type="submit">
             {t("login", { defaultValue: "Accedi" })}
           </button>
           {login && (

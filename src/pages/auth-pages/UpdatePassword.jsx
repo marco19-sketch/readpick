@@ -1,7 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-// import { confirmPasswordReset } from "firebase/auth";
-// import { auth } from "../../firebase";
 import { validatePassword } from "../../utils/validatePassword";
 import { useTranslation } from "react-i18next";
 import "./auth.css";
@@ -9,7 +7,7 @@ import mobileBg from "../../assets/images/leaves-640.avif";
 import desktopBg from "../../assets/images/leaves-1280.avif";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
-import useLazyFirebaseAuth from '../../hooks/useLazyFirebaseAuth';
+import useLazyFirebaseAuth from "../../hooks/useLazyFirebaseAuth";
 
 export default function UpdatePassword() {
   const [newPassword, setNewPassword] = useState("");
@@ -22,10 +20,10 @@ export default function UpdatePassword() {
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const loadAuthFunction = useLazyFirebaseAuth();
-  
-    const handleVisibility = useCallback(() => {
-      setPasswordVisibility(!passwordVisibility);
-    }, [passwordVisibility]);
+
+  const handleVisibility = useCallback(() => {
+    setPasswordVisibility(!passwordVisibility);
+  }, [passwordVisibility]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -53,25 +51,10 @@ export default function UpdatePassword() {
     }
 
     try {
-      // await confirmPasswordReset(auth, oobCode, newPassword);
-
-      // Dynamically import the Firebase module here
-      // Use Promise.all to fetch both modules concurrently
-      // const [firebaseModule, authModule] = await Promise.all([
-      //   import("../../firebase"),
-      //   import("firebase/auth"),
-      // ]);
-
-      // const { auth } = firebaseModule;
-      // const { confirmPasswordReset } = authModule;
-
-      // await confirmPasswordReset(auth, oobCode, newPassword);
-
       const { auth, func: confirmPasswordReset } = await loadAuthFunction(
         "confirmPasswordReset"
       );
       await confirmPasswordReset(auth, oobCode, newPassword);
-
 
       setMsgGreen(true);
       setMessage(

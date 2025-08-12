@@ -1,5 +1,3 @@
-// src/context/AuthProvider.jsx
-import React from "react";
 import { AuthContext } from "./AuthContext";
 import { useMinimalAuth } from "../firebaseMinimal";
 
