@@ -29,6 +29,7 @@ export default function Login({ setLogin, login }) {
   const handleLogin = async e => {
     console.log("handleLogin fired");
     e.preventDefault();
+    
     if (!email || !password) {
       setError(
         t("missingCredentials", { defaultValue: "Inserisci email e password" })
@@ -91,6 +92,7 @@ export default function Login({ setLogin, login }) {
             placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
+            required
           />
           <br />
           <div className="auth-input-container">
@@ -101,6 +103,7 @@ export default function Login({ setLogin, login }) {
               placeholder="Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
+              required
             />
             <button
               className="auth-toggle-visibility"
