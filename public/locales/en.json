@@ -67,5 +67,6 @@
   "regSuccess": "Registration successful! You are logged in",
   "alreadyAccount": "Already have an account?",
   "enterEmail": "Enter your email",
-  "contact": "Contact me"
+  "contact": "Contact me",
+  "missingCredentials": "Insert email and password"
 }

@@ -7,10 +7,13 @@ import "./auth.css";
 import { useNavigate, NavLink } from "react-router-dom";
 // import useIsMobile from "../../hooks/useIsMobile";
 import mobileBg from "../../assets/images/book-813x711.avif";
-import desktopBg from '../../assets/images/book-1280.avif';
-import { useTranslation } from 'react-i18next';
+import desktopBg from "../../assets/images/book-1280.avif";
+import { useTranslation } from "react-i18next";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
+// import { AuthContext } from '../../context/AuthContext';
+import useLazyFirebaseAuth from "../../hooks/useLazyFirebaseAuth";
+
 
 
 export default function Register({ setLogin }) {
@@ -22,12 +25,13 @@ export default function Register({ setLogin }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-
+  // const { initAuth } = useContext(AuthContext);
   const { rules, isValid } = validatePassword(password);
+  const loadAuthFunction = useLazyFirebaseAuth();
 
   const handleVisibility = useCallback(() => {
-      setPasswordVisibility(!passwordVisibility);
-    }, [passwordVisibility])
+    setPasswordVisibility(!passwordVisibility);
+  }, [passwordVisibility]);
 
   // const isValid =
   //   rules.length && rules.uppercase && rules.number && rules.symbol;
@@ -41,11 +45,14 @@ export default function Register({ setLogin }) {
       // await createUserWithEmailAndPassword(auth, email.trim(), password);
 
       // Dynamically import the Firebase module here
-      const { auth, createUserWithEmailAndPassword } = await import(
-        "../../firebase"
-      );
+      // await initAuth();
+      // const { auth } = await import("../../firebase");
+      // const { createUserWithEmailAndPassword } = await import("firebase/auth");
 
-      await createUserWithEmailAndPassword(auth, email.trim(), password);
+      // await createUserWithEmailAndPassword(auth, email.trim(), password);
+
+      const { auth, func: createUser } = await loadAuthFunction("createUserWithEmailAndPassword");
+    await createUser(auth, email.trim(), password);
 
       setSuccess(true);
       setLogin(true);
@@ -80,21 +87,24 @@ export default function Register({ setLogin }) {
             onChange={e => setEmail(e.target.value)}
           />
           <br />
-          <div className='auth-input-container'>
-          <input
-            className="auth-input password"
-            type={passwordVisibility ? "text" : "password"}
-            placeholder={t("passRegister", {
-              defaultValue: "Inserisci una password forte...",
-            })}
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            onBlur={() => setPasswordTouched(true)}
-          />
-     <button className='auth-toggle-visibility' type="button" onClick={handleVisibility}>
-      {passwordVisibility ? <IoEye /> : <IoMdEyeOff />}
-            {/* {passwordVisibility ? "👁️" : "🙈"} */}
-          </button>
+          <div className="auth-input-container">
+            <input
+              className="auth-input password"
+              type={passwordVisibility ? "text" : "password"}
+              placeholder={t("passRegister", {
+                defaultValue: "Inserisci una password forte...",
+              })}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              onBlur={() => setPasswordTouched(true)}
+            />
+            <button
+              className="auth-toggle-visibility"
+              type="button"
+              onClick={handleVisibility}>
+              {passwordVisibility ? <IoEye /> : <IoMdEyeOff />}
+              {/* {passwordVisibility ? "👁️" : "🙈"} */}
+            </button>
           </div>
           {passwordTouched && (
             <ul style={{ listStyle: "none", padding: 0 }}>
@@ -135,12 +145,12 @@ export default function Register({ setLogin }) {
             <p className="auth-success">
               {t("regSuccess", {
                 defaultValue:
-                  'Registrazione avvenuta con successo! Sei connesso. ',
+                  "Registrazione avvenuta con successo! Sei connesso. ",
               })}
             </p>
           )}
           <p className="auth-p-link">
-            {t("alreadyAccount", { defaultValue: "Hai già un account?" })}{' '}
+            {t("alreadyAccount", { defaultValue: "Hai già un account?" })}{" "}
             <NavLink className="auth-nav-link" to="/login">
               {t("login")}
             </NavLink>
