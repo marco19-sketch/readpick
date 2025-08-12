@@ -10,17 +10,9 @@ import { AuthProvider } from "./context/AuthProvider";
 
 const root = createRoot(document.getElementById("root"));
 
-function removeSplash() {
-  const splash = document.getElementById("splash");
-  if (splash) {
-    splash.style.opacity = "0";
-    setTimeout(() => splash.remove(), 300);
-  }
-}
-
 root.render(
   <StrictMode>
-    <AuthProvider onAuthReady={removeSplash}>
+    <AuthProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>

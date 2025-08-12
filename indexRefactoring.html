@@ -26,27 +26,6 @@
       content="Find books by title, author or subject using the Open Library API. Explore, search, and discover your next read." />
     <title>Book Finder | Search and Discover Books</title>
 
-     <style>
-      /* Inline splash styles – minimal & blocking */
-      #splash {
-        position: fixed;
-        inset: 0;
-        background: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: system-ui, sans-serif;
-        font-size: 1.25rem;
-        color: #333;
-        z-index: 9999;
-      }
-      #splash img {
-        width: 60px;
-        height: 60px;
-        margin-right: 12px;
-      }
-    </style>
-
     <style>
       .single-book {
         margin: 20px auto;
@@ -121,18 +100,6 @@
     <!-- <link rel="preconnect" href="https://www.google-analytics.com" /> -->
   </head>
   <body>
-
-     <!-- Splash Screen -->
-    <div id="splash">
-      <img src="data:image/svg+xml;utf8,
-        <svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 100 100'>
-          <circle cx='50' cy='50' r='40' stroke='%23007bff' stroke-width='10' fill='none' stroke-dasharray='251' stroke-linecap='round'>
-            <animateTransform attributeName='transform' type='rotate' from='0 50 50' to='360 50 50' dur='1s' repeatCount='indefinite'/>
-          </circle>
-        </svg>" alt="Loading" />
-      <span>Loading Book Finder...</span>
-    </div>
-
     <div id="root"></div>
     <!-- Google tag (gtag.js) -->
     <!-- <script
