@@ -3,7 +3,7 @@ import { AuthContext } from "./AuthContext";
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [unsub, setUnsub] = useState(null);
 
   const initAuth = async () => {
@@ -11,16 +11,19 @@ export function AuthProvider({ children }) {
 
     try {
       const firebaseModule = await import("../firebase");
-      const { auth, onAuthStateChanged } = firebaseModule;
+      const { auth } = firebaseModule;
+
+      const authFunctions = await import("firebase/auth");
+      const { onAuthStateChanged } = authFunctions;
 
       const newUnsub = onAuthStateChanged(auth, currentUser => {
         setUser(currentUser);
-        // setLoading(false);
+        setLoading(false);
       });
       setUnsub(() => newUnsub);
     } catch (err) {
       console.error("Failed to load Firebase auth module:", err);
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -34,7 +37,7 @@ export function AuthProvider({ children }) {
   }, [unsub]); // The useEffect hook depends on 'unsub' state
 
   return (
-    <AuthContext.Provider value={{ user, initAuth }}>
+    <AuthContext.Provider value={{ user, initAuth, loading }}>
       { children}
       {/* {!loading && children} */}
     </AuthContext.Provider>
