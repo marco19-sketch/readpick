@@ -49,14 +49,8 @@ export function useMinimalAuth() {
 
     loadMinimalAuth()
       .then(({ auth, onAuthStateChanged }) => {
-        unsubscribe = onAuthStateChanged(auth, async currentUser => {
-          if (currentUser) {
-            // Wait until token is ready before marking initialized
-            await currentUser.getIdToken();
-            setUser(currentUser);
-          } else {
-            setUser(null);
-          }
+        unsubscribe = onAuthStateChanged(auth, currentUser => {
+          setUser(currentUser);
           setLoading(false);
           setIsAuthInitialized(true);
         });
@@ -74,6 +68,3 @@ export function useMinimalAuth() {
 
   return { user, loading, isAuthInitialized };
 }
-
-// Export current auth instance
-export { authInstance as auth, onAuthStateChangedRef as onAuthStateChanged };
