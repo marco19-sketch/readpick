@@ -149,7 +149,7 @@ export default function BookCard({
         <div className="amazon-buy-link-container">
           {showAmazon &&(
           <Suspense fallback={<div>Loading...</div>}>
-            <AmazonLink title={title} author={authors} />
+            <LazyAmazonLink title={title} author={authors} />
           </Suspense>
           )}
           <p className="affiliate-para">Affiliate link</p>
