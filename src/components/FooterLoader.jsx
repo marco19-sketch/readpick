@@ -1,20 +1,26 @@
+// FooterLoader.jsx
 import { useState, useEffect } from "react";
 
-function FooterLoader() {
+export default function FooterLoader() {
   const [FooterComponent, setFooterComponent] = useState(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      
-      import("./Footer").then(mod => {
-        setFooterComponent(() => mod.default);
+    // Load footer after the browser is idle
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => {
+        import("./Footer").then(mod => {
+          setFooterComponent(() => mod.default);
+        });
       });
-    }, 3000);
-
-    return () => clearTimeout(timer);
+    } else {
+      // Fallback for browsers without requestIdleCallback
+      setTimeout(() => {
+        import("./Footer").then(mod => {
+          setFooterComponent(() => mod.default);
+        });
+      }, 1000);
+    }
   }, []);
 
   return FooterComponent ? <FooterComponent /> : null;
 }
-
-export default FooterLoader;
