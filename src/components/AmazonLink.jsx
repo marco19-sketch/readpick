@@ -7,7 +7,7 @@ const AmazonLink = ({ title, author}) => {
   const [showLink, setShowLink]  = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowLink(true), 2000);
+    const timer = setTimeout(() => setShowLink(true), 4000);
     return () => clearTimeout(timer);
   }, [])
 
