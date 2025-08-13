@@ -1,11 +1,10 @@
-
 import "./BookCard.css";
 import FavoriteButton from "./FavoriteButton";
 import { useThumbnail } from "../utils/useThumbnail";
 // import AmazonLink from './AmazonLink';
 import React, { Suspense } from "react";
 
-const AmazonLink = React.lazy(() => import('./AmazonLink'))
+const AmazonLink = React.lazy(() => import("./AmazonLink"));
 
 const languageMap = {
   en: "English",
@@ -59,8 +58,6 @@ export default function BookCard({
     publishedDate && !isNaN(new Date(publishedDate))
       ? new Date(publishedDate).getFullYear()
       : "Unknown";
-
- 
 
   return (
     <div
@@ -144,11 +141,12 @@ export default function BookCard({
         </p>
 
         <div className="amazon-buy-link-container">
-          <AmazonLink title={title} author={authors} />
-          <p className='affiliate-para'>Affiliate link</p>
+          <Suspense fallback={<div>Loading...</div>}>
+            <AmazonLink title={title} author={authors} />
+          </Suspense>
+          <p className="affiliate-para">Affiliate link</p>
           {/* <p style={{ fontSize: "0.75rem", margin: 0  }}>Affiliate link</p> */}
         </div>
-        
       </div>
     </div>
   );
