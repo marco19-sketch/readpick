@@ -2,9 +2,9 @@ import "./BookCard.css";
 import FavoriteButton from "./FavoriteButton";
 import { useThumbnail } from "../utils/useThumbnail";
 // import AmazonLink from './AmazonLink';
-import React, { Suspense } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 
-const AmazonLink = React.lazy(() => import("./AmazonLink"));
+const LazyAmazonLink = React.lazy(() => import("./AmazonLink"));
 
 const languageMap = {
   en: "English",
@@ -31,6 +31,12 @@ export default function BookCard({
   isHighPriority,
 }) {
   const thumbnail = useThumbnail(book);
+  const [showAmazon, setShowAmazon] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowAmazon(true), 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const {
     title = "Untitled",
@@ -141,9 +147,11 @@ export default function BookCard({
         </p>
 
         <div className="amazon-buy-link-container">
+          {showAmazon &&(
           <Suspense fallback={<div>Loading...</div>}>
             <AmazonLink title={title} author={authors} />
           </Suspense>
+          )}
           <p className="affiliate-para">Affiliate link</p>
           {/* <p style={{ fontSize: "0.75rem", margin: 0  }}>Affiliate link</p> */}
         </div>

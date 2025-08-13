@@ -1,17 +1,12 @@
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from 'react';
+
 
 const AmazonLink = ({ title, author}) => {
   const { t } = useTranslation();
-  const [showLink, setShowLink]  = useState(false);
+ 
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowLink(true), 4000);
-    return () => clearTimeout(timer);
-  }, [])
-
-    if (!title || !showLink) return null;
+    if (!title) return null;
 
     const generateAmazonLink = (title, author) => {
         const baseUrl = 'https://www.amazon.it/s';
