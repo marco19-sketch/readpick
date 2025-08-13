@@ -8,8 +8,11 @@ import { scrollup } from "../utils/scrollup";
 import FavoriteButton from "../components/FavoriteButton";
 import { devLog } from "../utils/devLog";
 import BookResults from "../components/BookResults";
-// import desktopBg from "../assets/images/pexels-tima-1920.avif";
-// import mobileBg from "../assets/images/pexels-tima-500.avif";
+import bg480 from "../assets/images/pexels-tima-480.avif";
+import bg768 from "../assets/images/pexels-tima-768.avif";
+import bg1024 from "../assets/images/pexels-tima-1024.avif";
+import bg1600 from "../assets/images/pexels-tima-1600.avif";
+import bg1920 from "../assets/images/pexels-tima-1920.avif";
 import LoadingSkeleton from '../components/LoadingSkeleton';
 
 // Cloudinary cdn service
@@ -178,12 +181,12 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   return (
     <>
       <img
-        src="/assets/images/pexels-tima-768.avif"
-        srcSet="/assets/images/pexels-tima-480.avif 480w, 
-        /assets/images/pexels-tima-768.avif 768w,
-        /assets/images/pexels-tima-1024.avif 1024w,
-        /assets/images/pexels-tima-1600.avif 1600w,
-        /assets/images/pexels-tima-1920.avif 1920w"
+        src={bg768}
+        srcSet={`${bg480} 480w, 
+        ${bg768} 768w,
+        ${bg1024} 1024w,
+        ${bg1600} 1600w,
+        ${bg1920} 1920w"`}
         sizes="(max-width: 480px) 480px,
         (max-width: 768px) 768px,
         (max-width: 1024px) 1024px,
