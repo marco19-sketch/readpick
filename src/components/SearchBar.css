@@ -20,12 +20,14 @@
   border: none;
 }
 
-.btn-element:hover {
-  transform: scale(1.7)
-}
 
 .btn-element:focus {
   color: white; 
+  outline: none;
+}
+
+.btn-element:active {
+  color: green;
 }
 
 .reset-btn {
@@ -112,7 +114,7 @@
   }
 
   .btn-element:hover {
-    transform: scale(1.3);
+    transform: scale(1.4);
   }
 
   
