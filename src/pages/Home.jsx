@@ -204,7 +204,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
         <header>
           <h1 className="main-title">Book Finder</h1>
         </header>
-        <div className="main-container">
+        <div className="main-container" id='main-content'>
           <SearchBar
             query={query}
             setQuery={setQuery}
