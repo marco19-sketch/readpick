@@ -33,8 +33,9 @@ export default function BookCard({
   const thumbnail = useThumbnail(book);
   const [showAmazon, setShowAmazon] = useState(false);
 
+  // Delaying Amazon render, it does not improve LCP anyway
   useEffect(() => {
-    const timer = setTimeout(() => setShowAmazon(true), 4000);
+    const timer = setTimeout(() => setShowAmazon(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 
