@@ -202,7 +202,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
 
       <div className={`home-page ${loading ? "wait-cursor" : ""}`}>
         <header>
-          <h1 className="main-title">Book Finder</h1>
+          <h1 className="main-title">Read Pick</h1>
         </header>
         <div className="main-container" id='main-content'>
           <SearchBar
