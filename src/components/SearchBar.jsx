@@ -134,6 +134,7 @@ export default function SearchBar({
         <button
           className="btn-element"
           type="button"
+          aria-label={t('startSearch')}
           onClick={() => {
             onSearch(query);
             setSuggestions([]);

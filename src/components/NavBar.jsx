@@ -17,11 +17,13 @@ export default function NavBar({ t, favorites, login, setLogin }) {
   return (
     <nav>
       <NavLink
+        aria-label='link to home page'
         className={({ isActive }) => (isActive ? "home-active-link" : "home")}
         to="/">
         {isMobile ? <FaHome /> : "Home"}
       </NavLink>
       <NavLink
+        aria-label='link to favorites page'
         className={({ isActive }) =>
           isActive ? "favorites-active-link" : "favorites"
         }
@@ -31,6 +33,7 @@ export default function NavBar({ t, favorites, login, setLogin }) {
 
       {login ? (
         <button
+        aria-label={t('logout')}
           className="logout"
           onClick={() => {
             logout();
@@ -41,8 +44,10 @@ export default function NavBar({ t, favorites, login, setLogin }) {
       ) : isLoginPage ? (
         ""
       ) : (
-        <NavLink className="login" to="/login">
-          {isMobile ? <IoLogIn /> : t("login") || "Accedi"}
+        <NavLink 
+        aria-label={t('login')}
+        className="login" to="/login">
+          {isMobile ? <IoLogIn /> : t("login", {defaultValue: "Accedi"})}
         </NavLink>
       )}
     </nav>

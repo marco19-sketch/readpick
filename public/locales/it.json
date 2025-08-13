@@ -66,5 +66,6 @@
   "alreadyAccount": "Hai già un account?",
   "enterEmail": "Inserisci email",
   "contact": "Contattami",
-  "missingCredentials": "Inserisci email e password"
+  "missingCredentials": "Inserisci email e password",
+  "startSearch": "Avvia la ricerca"
 }
