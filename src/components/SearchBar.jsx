@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import CustomRadio from "./CustomRadio";
 import "./SearchBar.css";
+import { FaSearch } from "react-icons/fa";
 
 const labelsMap = {
   intitle: "Title",
@@ -130,18 +131,20 @@ export default function SearchBar({
             ))}
           </ul>
         )}
+        <button
+          className="btn-element"
+          type="button"
+          onClick={() => {
+            onSearch(query);
+            setSuggestions([]);
+          }}>
+          <FaSearch />
+          {/* {t("startSearch")} */}
+        </button>
       </div>
-      <button
-        className="btn-element"
-        type="button"
-        onClick={() => {
-          onSearch(query);
-          setSuggestions([]);
-        }}>
-        {t("startSearch")}
-      </button>
+
       <button className="reset-btn" type="button" onClick={onReset}>
-        {t("reset")}
+        Reset
       </button>
     </div>
   );

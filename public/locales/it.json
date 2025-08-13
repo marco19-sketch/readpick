@@ -1,7 +1,5 @@
 {
   "title": "Trova Libri",
-  "startSearch": "Ricerca",
-  "reset": "Reimposta",
   "searchby": "Cerca per",
   "enterSearchTerm": "Inserisci termine...",
   "loading": "Ricerca libri in corso...",
