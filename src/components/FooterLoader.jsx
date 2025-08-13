@@ -9,7 +9,7 @@ function FooterLoader() {
       import("./Footer").then(mod => {
         setFooterComponent(() => mod.default);
       });
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
