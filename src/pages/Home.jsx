@@ -13,10 +13,10 @@ import BookResults from "../components/BookResults";
 import LoadingSkeleton from '../components/LoadingSkeleton';
 
 // Cloudinary cdn service
-import { Cloudinary } from "@cloudinary/url-gen";
-import { auto } from "@cloudinary/url-gen/actions/resize";
-import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
-import { AdvancedImage } from "@cloudinary/react";
+// import { Cloudinary } from "@cloudinary/url-gen";
+// import { auto } from "@cloudinary/url-gen/actions/resize";
+// import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
+// import { AdvancedImage } from "@cloudinary/react";
 
 
 function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
@@ -34,9 +34,9 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const [activeQuery, setActiveQuery] = useState("");
   const [activeMode, setActiveMode] = useState("intitle");
   const [suggestions, setSuggestions] = useState([]);
-  const cld = new Cloudinary({
-    cloud: { cloudName: "db7p5mug9" },
-  });
+  // const cld = new Cloudinary({
+  //   cloud: { cloudName: "db7p5mug9" },
+  // });
 
   // Define mobile background
 //   const mobileBg = cld
@@ -48,11 +48,11 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
 //     .resize(auto().gravity(autoGravity()).width(500));
 
   // Define desktop background
-  const desktopBg = cld
-    .image("pexels-tima-1920_dfkvdh.avif")
-    .format("auto")
-    .quality("auto")
-    .resize(auto().gravity(autoGravity()).width(1920));
+  // const desktopBg = cld
+  //   .image("pexels-tima-1920_dfkvdh.avif")
+  //   .format("auto")
+  //   .quality("auto")
+  //   .resize(auto().gravity(autoGravity()).width(1920));
 
   const placeholderMap = {
     intitle: t("searchPlaceholder.intitle"),
@@ -177,64 +177,25 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
 
   return (
     <>
-      {/* <img
-        src={mobileBg}
-        srcSet={`${mobileBg} 500w, ${desktopBg} 1920w`}
-        sizes="(max-width: 640px) 100vw, 1920px"
+      <img
+        src="/assets/images/pexels-tima-768.avif"
+        srcSet="/assets/images/pexels-tima-480.avif 480w, 
+        /assets/images/pexels-tima-768.avif 768w,
+        /assets/images/pexels-tima-1024.avif 1024w,
+        /assets/images/pexels-tima-1600.avif 1600w,
+        /assets/images/pexels-tima-1920.avif 1920w"
+        sizes="(max-width: 480px) 480px,
+        (max-width: 768px) 768px,
+        (max-width: 1024px) 1024px,
+        (max-width: 1600px) 1600px,
+        1920px"
         alt=" "
         aria-hidden="true"
         className="home-bg"
         decoding="async"
         fetchPriority="high"
         loading="eager"
-      /> */}
-
-      <picture>
-        {/* Mobile: up to 640px */}
-        <source
-          media="(max-width: 640px)"
-          srcSet={desktopBg.toURL({ width: 640 })}
-        //   srcSet={mobileBg.toURL({ width: 640 })}
-        />
-
-        {/* Tablet: 641px–1024px */}
-        <source
-          media="(max-width: 1024px)"
-          srcSet={desktopBg.toURL({ width: 1024 })}
-        />
-
-        {/* Laptop: 1025px–1440px */}
-        <source
-          media="(max-width: 1440px)"
-          srcSet={desktopBg.toURL({ width: 1440 })}
-        />
-
-        {/* Large desktop: 1441px+ */}
-        <source
-          media="(min-width: 1441px)"
-          srcSet={desktopBg.toURL({ width: 1920 })}
-        />
-
-        <img
-          src={desktopBg.toURL({ width: 1920 })}
-          alt=""
-          aria-hidden="true"
-          className="home-bg"
-          decoding="async"
-          fetchPriority="high"
-          loading="eager"
-        />
-
-        {/* <AdvancedImage
-          cldImg={desktopBg}
-          alt=""
-          aria-hidden="true"
-          className="home-bg"
-          decoding="async"
-          fetchPriority="high"
-          loading="eager"
-        /> */}
-      </picture>
+      />
 
       <div className={`home-page ${loading ? "wait-cursor" : ""}`}>
         <header>
