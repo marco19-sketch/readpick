@@ -1,17 +1,10 @@
-
-import { useEffect } from 'react';
+import "./Footer.css";
 import { FaEnvelope } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
 
 
 export default function Footer() {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    // This will load the CSS asynchronously, Vite will handle hashed filename
-    import("../styles/Footer.css");
-  }, []);
-
   return (
     <footer className="site-footer">
       <div className="media-credits">
