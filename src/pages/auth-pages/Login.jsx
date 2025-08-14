@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { IoMdEyeOff } from "react-icons/io";
 import { IoEye } from "react-icons/io5";
 import { auth, signInWithEmailAndPassword } from "../../firebaseMinimal";
+import GoogleLoginButton from "../../components/GoogleLoginButton";
 
 export default function Login({ setLogin, login }) {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ export default function Login({ setLogin, login }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleVisibility = useCallback(() => {
     setPasswordVisibility(!passwordVisibility);
@@ -29,13 +31,16 @@ export default function Login({ setLogin, login }) {
       );
       return;
     }
-
+    setLoading(true);
     setError("");
     try {
       await signInWithEmailAndPassword(auth, email, password);
 
       setLogin(true);
-      setTimeout(() => navigate("/"), 2000);
+      setTimeout(() => {
+        navigate("/");
+        setLoading(false);
+      }, 2000);
     } catch (err) {
       console.error("error", err);
       setError(
@@ -88,7 +93,7 @@ export default function Login({ setLogin, login }) {
             </button>
           </div>
           <br />
-          <button className="auth-btn" type="submit">
+          <button disabled={loading} className="auth-btn" type="submit">
             {t("login", { defaultValue: "Accedi" })}
           </button>
           {login && (
@@ -113,6 +118,8 @@ export default function Login({ setLogin, login }) {
             {t("signIn", { defaultValue: "Registrati" })}
           </NavLink>
         </p>
+        <p className='oppure'>oppure</p>
+        <GoogleLoginButton loading={loading} setLoading={setLoading} setLogin={setLogin} />
       </div>
     </div>
   );

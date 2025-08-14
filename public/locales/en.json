@@ -67,5 +67,6 @@
   "enterEmail": "Enter your email",
   "contact": "Contact me",
   "missingCredentials": "Insert email and password",
-  "startSearch": "Start search"
+  "startSearch": "Start search",
+  "googleSingIn": "Sign-in with Google"
 }

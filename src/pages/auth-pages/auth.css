@@ -68,6 +68,7 @@
   transform: scale(1.2)
 }
 
+.google-btn,
 .auth-btn {
   margin: 10px auto;
   display: block;
@@ -75,6 +76,35 @@
   color: var(--text-color);
   box-shadow: var(--shadow);
   text-shadow: var(--shadow);
+  line-height: 1.5;
+}
+
+.google-span {
+  display: inline-block;
+  background-color: black;
+  width: 35px;
+  height: 35px;
+  padding: 4px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  margin-right: 5px;
+  box-shadow: var(--shadow);
+}
+
+.oppure {
+  color: var(--main-color);
+  text-align: center;
+}
+
+/* .google-btn {
+  display: block;
+  margin: 10px auto;
+} */
+
+.auth-btn:disabled,
+.google-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .auth-link {
@@ -92,6 +122,7 @@
 .auth-nav-link {
   color: rgb(35, 221, 221);
 }
+
 
 @media (hover: hover) {
   .auth-btn:hover {
