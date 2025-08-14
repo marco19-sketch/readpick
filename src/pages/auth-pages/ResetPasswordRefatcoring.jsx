@@ -12,12 +12,8 @@ export default function ResetPassword() {
   const { t } = useTranslation();
 
   const resetPassword = async email => {
-    const actionCodeSettings = {
-      url: `${window.location.origin}/update-password`, //dynamic link to the app
-        handleCodeInApp: true
-    };
     try {
-      await sendPasswordResetEmail(auth, email, actionCodeSettings);
+      await sendPasswordResetEmail(auth, email);
       return { success: true };
     } catch (error) {
       return { success: false, error: error.message || error.toString() };

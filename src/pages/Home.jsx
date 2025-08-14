@@ -186,7 +186,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
         ${bg768} 768w,
         ${bg1024} 1024w,
         ${bg1600} 1600w,
-        ${bg1920} 1920w"`}
+        ${bg1920} 1920w`}
         sizes="(max-width: 480px) 480px,
         (max-width: 768px) 768px,
         (max-width: 1024px) 1024px,
