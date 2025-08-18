@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FcGoogle } from "react-icons/fc";
 
-export default function GoogleLoginButton({ setLogin, loading, setLoading }) {
+export default function GoogleLoginButton({ setLogin, loading, setLoading, error}) {
+// export default function GoogleLoginButton({ setLogin, loading, setLoading, error }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
  
@@ -28,7 +29,8 @@ export default function GoogleLoginButton({ setLogin, loading, setLoading }) {
         className="google-btn"
         onClick={handleGoogleSignIn}
         // aria-label={t("googleSingIn", { defaultValue: "Accedi con Google" })}
-        disabled={loading}>
+        disabled={loading && error === ''}>
+        {/* disabled={error === '' && loading}> */}
         {/* <button className='google-btn' onClick={signInWithGoogle}> */}
         <span className='google-span'>{<FcGoogle className='google-icon'/>}</span>{' '}
         {t("googleSingIn", { defaultValue: "Accedi con Google" })}

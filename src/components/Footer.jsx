@@ -9,7 +9,7 @@ export default function Footer() {
 
   useEffect(() => {
     // This will load the CSS asynchronously, Vite will handle hashed filename
-    import(".//Footer.css");
+    import("./Footer.css");
   }, []);
 
   return (

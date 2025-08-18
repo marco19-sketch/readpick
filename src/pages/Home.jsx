@@ -37,25 +37,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
   const [activeQuery, setActiveQuery] = useState("");
   const [activeMode, setActiveMode] = useState("intitle");
   const [suggestions, setSuggestions] = useState([]);
-  // const cld = new Cloudinary({
-  //   cloud: { cloudName: "db7p5mug9" },
-  // });
-
-  // Define mobile background
-//   const mobileBg = cld
-//     .image(
-//       "pexels-tima-500_txknws.avif"
-//     ) // e.g. "folder/imageName" without extension
-//     .format("auto")
-//     .quality("auto")
-//     .resize(auto().gravity(autoGravity()).width(500));
-
-  // Define desktop background
-  // const desktopBg = cld
-  //   .image("pexels-tima-1920_dfkvdh.avif")
-  //   .format("auto")
-  //   .quality("auto")
-  //   .resize(auto().gravity(autoGravity()).width(1920));
+ 
 
   const placeholderMap = {
     intitle: t("searchPlaceholder.intitle"),
@@ -204,7 +186,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
         <header>
           <h1 className="main-title">Read Pick</h1>
         </header>
-        <div className="main-container" id='main-content'>
+        <div className="main-container" id="main-content">
           <SearchBar
             query={query}
             setQuery={setQuery}
@@ -223,7 +205,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
 
           {!hasSearched && (
             <h2 className="trending-books">
-              {t("trendingBooks") || "Trending Books"}
+              {t("trendingBooks", { defaultValue: "Trending Books" })}
             </h2>
           )}
 
@@ -258,7 +240,7 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
                     return newIndex;
                   });
                 }}>
-                {t("loadMore") || "Load more"}
+                {t("loadMore", { defaultValue: "Load more" })}
               </button>
             </>
           )}
@@ -266,14 +248,14 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
           {!loading && showNoResultsModal && (
             <Modal onClose={() => setShowNoResultsModal(false)}>
               <p className="no-results">
-                {t("noResults") || "No results found"}
+                {t("noResults", { defaultValue: "No results found" })}
               </p>
             </Modal>
           )}
           {!loading && startIndex !== 0 && showNoResultsModal && (
             <Modal onClose={() => setShowNoResultsModal(false)}>
               <p className="no-results">
-                {t("noMoreResults") || "No more results"}
+                {t("noMoreResults", { defaultValue: "No more results" })}
               </p>
             </Modal>
           )}
@@ -283,9 +265,12 @@ function Home({ favorites, toggleFavorite, fetchedBooks, setFetchedBooks }) {
               <div className="modal">
                 <h2 id="modal-title">{selectedTitle?.volumeInfo?.title}</h2>
                 <p className="full-description">
-                  <strong>{t("fullDescription") || "Full Description"}:</strong>{" "}
+                  <strong>
+                    {t("fullDescription", { defaultValue: "Full Description" })}
+                    :
+                  </strong>{" "}
                   {selectedTitle.volumeInfo?.description ||
-                    t("noDescription", "No description available")}
+                    t("noDescription", {defaultValue: "No description available"})}
                 </p>
               </div>
               <FavoriteButton

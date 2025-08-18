@@ -17,6 +17,8 @@ export default function Login({ setLogin, login }) {
   const { t } = useTranslation();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [loading, setLoading] = useState(false);
+  // const [retryMsg, setRetryMsg] = useState(false);
+ 
 
   const handleVisibility = useCallback(() => {
     setPasswordVisibility(!passwordVisibility);
@@ -45,12 +47,22 @@ export default function Login({ setLogin, login }) {
       console.error("error", err);
       setError(
         t("loginError", {
-          error: err.message,
-          defaultValue: "Credenziali errate",
+          // error: err.message,
+          defaultValue: "Credenziali errate, riprova",
         })
       );
+      // navigate('/');
+      // setTimeout(() => {navigate('/login');
+        
+      // }, 1000);
+      // setRetryMsg(true);
+      setEmail('');
+      setPassword('');
     }
   };
+  // console.log('message', retryMsg)
+
+  
   return (
     <div className="auth-background">
       <img
@@ -91,11 +103,10 @@ export default function Login({ setLogin, login }) {
               {passwordVisibility ? <IoEye /> : <IoMdEyeOff />}
               {/* {passwordVisibility ? "👁️" : "🙈"} */}
             </button>
+            {/* {retryMsg && (
+              <p className='retry-msg'>Email o password errate, riprova</p>
+            )} */}
           </div>
-          <br />
-          <button disabled={loading} className="auth-btn" type="submit">
-            {t("login", { defaultValue: "Accedi" })}
-          </button>
           {login && (
             <p className="auth-success">
               {t("loggedSuccess", { defaultValue: "Accesso in corso..." })}
@@ -106,6 +117,14 @@ export default function Login({ setLogin, login }) {
               {error}
             </p>
           )}
+          <br />
+          <button
+            disabled={error === "" && loading}
+            className="auth-btn"
+            type="submit">
+            {/* <button disabled={!retryMsg && loading} className="auth-btn" type="submit"> */}
+            {t("login", { defaultValue: "Accedi" })}
+          </button>
         </form>
 
         <NavLink className="auth-link" to="/reset-password">
@@ -118,8 +137,14 @@ export default function Login({ setLogin, login }) {
             {t("signIn", { defaultValue: "Registrati" })}
           </NavLink>
         </p>
-        <p className='oppure'>oppure</p>
-        <GoogleLoginButton loading={loading} setLoading={setLoading} setLogin={setLogin} />
+        <p className="oppure">oppure</p>
+        <GoogleLoginButton
+          loading={loading}
+          // loading={error === "" && loading}
+          error={error}
+          setLoading={setLoading}
+          setLogin={setLogin}
+        />
       </div>
     </div>
   );

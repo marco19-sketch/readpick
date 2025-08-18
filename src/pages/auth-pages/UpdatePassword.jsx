@@ -73,7 +73,7 @@ export default function UpdatePassword() {
       <img
         className="auth-bg-auto-size"
         src={mobileBg}
-        srcSet={`${mobileBg} 907w, ${desktopBg} 1280w`}
+        srcSet={`${mobileBg} 640w, ${desktopBg} 1280w`}
         sizes="(max-width: 640px) 100vw, 1280px"
         alt=""
         aria-hidden="true"
