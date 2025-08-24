@@ -14,6 +14,7 @@ const Register = lazy(() => import("./pages/auth-pages/Register"));
 const ResetPassword = lazy(() => import("./pages/auth-pages/ResetPassword"));
 const UpdatePassword = lazy(() => import("./pages/auth-pages/UpdatePassword"));
 import ProtectedRoute from "./components/ProtectedRoute";
+import SplashScreen from './pages/SplashScreen';
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
 
   const isAuthPage = authPaths.includes(location.pathname);
   const isFavoritesPage = location.pathname === "/favorites";
+  const isSplashPage = location.pathname === '/';
 
   useGoogleAnalytics();
   const [fetchedBooks, setFetchedBooks] = useState(() => {
@@ -95,14 +97,17 @@ export default function App() {
             ? "auth-page-wrapper"
             : "home-page"
         }`}>
-        <NavBar setLogin={setLogin} login={login} favorites={favorites} t={t} />
+        {!isSplashPage && <NavBar setLogin={setLogin} login={login} favorites={favorites} t={t} />}
 
-        <LanguageSwitcher />
+        {!isSplashPage && <LanguageSwitcher />}
 
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route
-              path="/"
+            path='/'
+            element={<SplashScreen />}/>
+            <Route
+              path="/home"
               element={
                 <Home
                   favorites={favorites}
@@ -140,9 +145,6 @@ export default function App() {
       <BackToTop scrollContainerSelector="body" />
 
       <FooterLoader />
-      {/* <Suspense fallback={<div>Loading</div>}>
-        <Footer />
-      </Suspense> */}
     </div>
   );
 }
