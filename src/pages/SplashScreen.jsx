@@ -1,4 +1,4 @@
-import "./splash.css";
+import "./Splash.css";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
