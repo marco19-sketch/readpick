@@ -11,6 +11,7 @@ export default function SplashScreen() {
             navigate('/home');
         }, 4000);
 
+        
         return () => clearTimeout(timer)
     }, [navigate])
 
