@@ -3,20 +3,15 @@ import { useState, useEffect } from "react";
 import { Suspense, lazy } from "react";
 const Favorites = lazy(() => import("./pages/Favorites"));
 const Home = lazy(() => import("./pages/Home"));
-// const Footer = lazy(() => import("./components/Footer"));
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import BackToTop from "./components/BackToTop";
 import NavBar from "./components/NavBar";
 import FooterLoader from "./components/FooterLoader";
 import useGoogleAnalytics from "./hooks/useGoogleAnalytics";
-// import Login from "./pages/auth-pages/Login";
 const Login = lazy(() => import('./pages/auth-pages/Login'))
-// import Register from "./pages/auth-pages/Register";
 const Register = lazy(() => import("./pages/auth-pages/Register"));
-// import ResetPassword from "./pages/auth-pages/ResetPassword";
 const ResetPassword = lazy(() => import("./pages/auth-pages/ResetPassword"));
-// import UpdatePassword from "./pages/auth-pages/UpdatePassword";
 const UpdatePassword = lazy(() => import("./pages/auth-pages/UpdatePassword"));
 import ProtectedRoute from "./components/ProtectedRoute";
 
