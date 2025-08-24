@@ -1,6 +1,7 @@
 import "./Splash.css";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import splash from '../assets/images/laurentiu-1920-rot.jpg';
 
 export default function SplashScreen() {
  const navigate = useNavigate();
@@ -16,7 +17,8 @@ export default function SplashScreen() {
   return (
     <div className="layout-container">
       <img
-        src="/src/assets/images/laurentiu-1920-rot.jpg"
+        src={splash}
+        // src="/src/assets/images/laurentiu-1920-rot.jpg"
         sizes="(max-width: 480px) 480px,
          (max-width: 768px) 768px,
          (max-width: 1024px) 1024px,
