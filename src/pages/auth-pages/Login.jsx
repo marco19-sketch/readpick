@@ -47,20 +47,16 @@ export default function Login({ setLogin, login }) {
       console.error("error", err);
       setError(
         t("loginError", {
-          // error: err.message,
+         
           defaultValue: "Credenziali errate, riprova",
         })
       );
-      // navigate('/');
-      // setTimeout(() => {navigate('/login');
-        
-      // }, 1000);
-      // setRetryMsg(true);
+    
       setEmail('');
       setPassword('');
     }
   };
-  // console.log('message', retryMsg)
+ 
 
   
   return (
@@ -137,7 +133,7 @@ export default function Login({ setLogin, login }) {
             {t("signIn", { defaultValue: "Registrati" })}
           </NavLink>
         </p>
-        <p className="oppure">oppure</p>
+        <p className="oppure">{t('or', {defaultValue: 'or'})}</p>
         <GoogleLoginButton
           loading={loading}
           // loading={error === "" && loading}

@@ -68,5 +68,6 @@
   "contact": "Contattami",
   "missingCredentials": "Inserisci email e password",
   "startSearch": "Avvia la ricerca",
-  "googleSingIn": "Accedi con Google"
+  "googleSingIn": "Accedi con Google",
+  "or": "oppure"
 }
